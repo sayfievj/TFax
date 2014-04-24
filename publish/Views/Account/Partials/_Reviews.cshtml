@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Review>
+
+
+<h3 class="s-title">
+    <a href="#">My Reviews</a>&nbsp;
+    <br class="hidden-lg">
+    <span class="note">Below are the current active reviews. Before a review goes live it needs to be moderated</span>
+</h3>
+<hr class="splitter-d">
+@foreach (var item in Model)
+{
+    <div class="s-details">
+        <ul>
+            <li class="col-2">@item.CreatedDate.GetValueOrDefault().ToShortDateString()</li>
+            <li class="col-2">@item.MemberMaster.GetFullName()<i class="@item.MemberMaster.GetColor()"></i> </li>
+            <li class="col-3">@item.Subject</li>
+            <li class="col-3">@item.MemberMaster.GetLocation()</li>
+            <li class="col-1">Active</li>
+            <li class="col-1"><span></span><a href="@Url.Action("Edit", "Review", new { id = item.Id })">Modify</a></li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+}

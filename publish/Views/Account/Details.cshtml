@@ -1,0 +1,163 @@
+﻿@model MemberMaster
+
+@{
+    ViewBag.Title = "See a Profile";
+    var profile = Model.Profile_Master.FirstOrDefault();
+}
+
+
+<div class="form-horizontal form-grey spaced">
+
+    <p class="greystand">
+        Account Info
+    </p>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email_Login, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            <p class="form-control-static">
+                @Html.DisplayFor(model => model.Email_Login)
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.FirstName, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.LastName, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    @if (Model.Cover_File != null)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cover_File, new { @class = "col-4 control-label tar" })
+            <div class="col-6">
+                <a href="@Model.Cover_File.ToBase64String()">
+                    <img alt="Cover Image" src="@Model.Cover_File.ToBase64ImageString(135,135)" />
+                </a>
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.Address, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Street, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.Street, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CityId, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.City.Name, null, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateId, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.State.Name, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryId, "CountryId", new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.Country.Name, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MemberClass, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DisplayFor(model => model.MemberClass, new { @class = "form-control-static" })
+        </div>
+    </div>
+
+    <p class="greystand">Diplomas and Certificates</p>
+    <div class="row spaced diploma-container">
+        <div data-id="edu-items">
+            @foreach (var edu in Model.Profile_EduBackground)
+            {
+                <div class="col-4 outim item-diploma">
+                    <table class="table-responsive">
+                        <tr>
+                            <th>@Html.LabelFor(model => edu.College_University, new { @class = "col-4 control-label tar" })</th>
+                            <td>@Html.DisplayFor(model => edu.College_University)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => edu.GraduateYear, new { @class = "col-4 control-label tar" })</th>
+                            <td>@Html.DisplayFor(model => edu.GraduateYear)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => edu.Major, new { @class = "col-4 control-label tar" })</th>
+                            <td>@Html.DisplayFor(model => edu.Major)</td>
+                        </tr>
+                        <tr>
+                            <th>@Html.LabelFor(model => edu.Degree, new { @class = "col-4 control-label tar" })</th>
+                            <td>@Html.DisplayFor(model => edu.Degree)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <a href="@Model.Cover_File.ToBase64String()">
+                                    <img alt="@edu.Proof_Title" title="@edu.Proof_Title" src="@edu.Proof_File.ToBase64ImageString(135, 135)" />
+                                </a>
+                                <strong class="label-space">@edu.Proof_Title</strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            }
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    @if (Model.MemberRoleId == (long?)Role.Tutor)
+    {
+        <p class="greystand">Links</p>
+        <div class="group">
+
+            @foreach (var link in profile.Profile_Links)
+            {
+                <p class="col-8">
+                    <a title="@link.LinkTitle" href="@link.LinkURL">@link.LinkTitle</a>
+                </p>
+            }
+        </div>
+        <div class="clearfix"></div>
+
+        <p class="greystand">Subjects</p>
+        <div class="group">
+
+            @foreach (var subject in profile.Profile_Subjects)
+            {
+
+                <p class="col-4">
+                    Subject: @subject.Subject
+                </p>
+                <p class="col-4">
+                    Representative: @subject.Representative
+                </p>
+
+            }
+            <div class="clearfix"></div>
+
+        </div>
+    }
+</div>

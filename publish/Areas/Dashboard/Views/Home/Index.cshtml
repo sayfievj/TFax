@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.ActionLink("Members", "Index", "MemberMaster")</li>
+    <li>@Html.ActionLink("Countries", "Index", "Country")</li>
+    <li>@Html.ActionLink("Contents", "Index", "TextContent")</li>
+    <li>@Html.ActionLink("FAQs", "Index", "FAQ")</li>
+</ul>

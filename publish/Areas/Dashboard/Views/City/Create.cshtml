@@ -1,0 +1,17 @@
+﻿@model City
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("Partials/City/_Form")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

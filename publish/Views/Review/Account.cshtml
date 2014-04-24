@@ -1,0 +1,91 @@
+﻿@model ReviewSearchViewModel
+
+@{
+    ViewBag.Title = "My Reviews";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+<div class="form-inline">
+    <div class="form-group">
+        <div class="col-6">
+            <label for="select-per-page" class="ib">Results per page</label><br>
+        </div>
+        <div class="col-6">
+            <select class="selectbox2" id="select-per-page" data-url="@Url.RouteUrl(new { page = 1})">
+                <option value="1">25</option>
+                <option value="2">50</option>
+                <option value="3">100</option>
+                <option value="5">200</option>
+                <option value="6">500</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="table-responsive">
+
+    @if (TempData["DeleteStatus"] != null)
+    {
+        <p class="alert alert-warning">
+            @TempData["DeleteStatus"]
+        </p>
+    }
+
+    <table width="100%" class="table table-hover teacherstats">
+
+        <tr>
+            <th width="15%">Review Title</th>
+            <th width="15%">Total Hours</th>
+            <th width="15%">Subject</th>
+            <th width="15%">Knowledge</th>
+            <th width="15%">Helpfulness</th>
+            <th width="15%">Passion</th>
+        </tr>
+
+        @foreach (var review in Model.Objects)
+        {
+            <tr>
+                <td>@Html.ActionLink(review.ReviewTitle, "Details", new { id = review.Id }, new { @class = "btn btn-link" })</td>
+                <td>0</td>
+                <td>@Html.DisplayFor(model => review.Subject)</td>
+                <td>@Html.DisplayFor(model => review.Score_SubjectKnowledge)</td>
+                <td>@Html.DisplayFor(model => review.Score_Helpfullness)</td>
+                <td>@Html.DisplayFor(model => review.Score_Passion)</td>
+                <td>
+                    @Html.ActionLink("Modify", "Edit", new { id = review.Id }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    @Html.PagedListPager(Model.Objects, page => Url.RouteUrl(new { page }), new PagedListRenderOptions
+    {
+        Display = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 5,
+        UlElementClasses = new[] { "t-page pull-right" }
+    })
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("select#select-per-page").val('@Model.Objects.PageSize');
+            $("select#select-per-page").change(function () {
+                var value = $(this).val();
+                if ($.trim(value)) {
+                    window.location.href = $(this).data("url") + "&size=" + value;
+                }
+
+            });
+        });
+    </script>
+}

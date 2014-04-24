@@ -1,0 +1,83 @@
+﻿@model IPagedList<Review>
+
+<div class="big-table">
+
+
+    <div class="big-table-header group">
+        <div class="col-1 cop">
+            <div class="cmp">Tutor</div>
+        </div>
+        <div class="col-11 cop">
+            <div class="col-2 cmp">Subjects</div>
+            <div class="col-2 cmp">Modified</div>
+            <div class="col-2 cmp">Location</div>
+            <div class="col-6 cop">
+                <div class="col-3 cmp">Knowledge</div>
+                <div class="col-3 cmp">Helpfulness</div>
+                <div class="col-3 cmp">Overall</div>
+                <div class="col-3 cmp">Reviews</div>
+            </div>
+        </div>
+    </div> <!-- end big-table-header -->
+
+    <div class="big-table-body">
+        @foreach (var review in Model.Where(w => w.ProfileId != null))
+        {
+            var profile = review.Profile_Master.MemberMaster;
+
+            <div class="group row-teacher">
+                <!-- single-teacher -->
+                <div class="col-1 cop">
+                    <div class="cmm2">
+                        <div class="group outim">
+                            <a href="@profile.Cover_File.ToBase64String()">
+                                <img src="@profile.Cover_File.ToBase64ImageString(77, 77)" alt="@profile.GetFullName()" />
+                                <i class="@profile.GetColor()"></i>
+                            </a>
+                            <i class="red"></i>
+                        </div>
+                        <p class="b tac"><a href="@Url.Action("Details", new {id = review.Id})">@profile.GetFullName()</a>k</p>
+                    </div>
+                </div>
+                <div class="col-11 cop">
+                    <div class="col-2 cmp"><span class="v-x b">Subjects: </span> @review.Subject </div>
+                    <div class="col-2 cmp"><span class="v-x b">Modified: </span> @review.ModifiedDate</div>
+                    <div class="col-2 cmp"><span class="v-x b">Location: </span> @profile.GetLocation()</div>
+                    <div class="col-6 cop">
+                        <div class="col-3 cmp"><span class="v-x b">Subject Knowledge: </span>Rating @review.Score_SubjectKnowledge</div>
+                        <div class="col-3 cmp"><span class="v-x b">Helpfulness: </span>Rating @review.Score_Helpfullness</div>
+                        <div class="col-3 cmp"><span class="v-x b">Overall: </span>@review.Score_Overall</div>
+                        <div class="col-3 cmp"><span class="v-x b">Reviews: </span> 0</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end single-teacher -->
+        }
+    </div> <!-- end big-table-body -->
+    <div class="clearfix"></div>
+</div>
+
+<div class="cleafix"></div>
+
+<hr class="splitter-d" />
+
+<div class="traverse ">
+    <div class="group">
+
+        <div class="col-5 pull-right spaced">
+            @Html.PagedListPager(Model, page => Url.RouteUrl(new { page, size = Model.PageSize }), new PagedListRenderOptions
+            {
+                Display = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5,
+                UlElementClasses = new[] { "group t-page pull-right" }
+            })
+        </div>
+        <div class="col-7 pull-right tar spaced"><p> Total <strong>@Model.PageCount</strong> pages </p></div>
+
+    </div>
+</div>

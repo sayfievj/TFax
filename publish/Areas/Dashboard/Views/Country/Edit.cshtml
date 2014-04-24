@@ -1,0 +1,17 @@
+﻿@model Country
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("Partials/Country/_Form")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

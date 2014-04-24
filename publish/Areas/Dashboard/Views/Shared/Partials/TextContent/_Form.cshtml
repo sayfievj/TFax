@@ -1,0 +1,43 @@
+﻿@model TextContent
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>TextContent</h4>
+        <hr />
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        @Html.GetId()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PageID, "Page", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PageID", String.Empty)
+                @Html.ValidationMessageFor(model => model.PageID)
+            </div>
+        </div> 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TitleHTML, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.TitleHTML)
+                @Html.ValidationMessageFor(model => model.TitleHTML)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BodyHTML, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.BodyHTML)
+                @Html.ValidationMessageFor(model => model.BodyHTML)
+            </div>
+        </div> 
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

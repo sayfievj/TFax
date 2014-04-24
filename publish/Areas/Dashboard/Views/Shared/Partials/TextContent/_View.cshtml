@@ -1,0 +1,72 @@
+﻿@model TextContent
+
+<div>
+    <h4>TextContent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PageID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleHTML)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.TitleHTML)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BodyHTML)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.BodyHTML)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status_TextContents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status_TextContents.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Language.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Language.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+    </dl>
+</div>

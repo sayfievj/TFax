@@ -1,0 +1,15 @@
+﻿@using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new
+    {
+        id = "logoutForm",
+        @class = "navbar-right"
+    }))
+{
+    @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-right">
+
+        <li>
+            <a href="@Url.Action("Profile", "Account", new { area = "" })"> Welcome back,@MembershipHelper.Current.FullName</a>
+        </li>
+        <li><a href="javascript:$('#logoutForm').submit()">Log off</a></li>
+    </ul>
+}

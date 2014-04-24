@@ -1,0 +1,21 @@
+﻿h1.site-title {
+    cursor: pointer;
+    _cursor: hand;
+    *cursor: hand;
+}
+
+
+#myCarousel .carousel-control {
+    width: 5% !important;
+}
+
+
+#myCarousel .carousel-indicators {
+    background-color: #E9E9E9;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0) 100%);
+    -ms-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom: -20px !important;
+}

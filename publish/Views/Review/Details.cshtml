@@ -1,0 +1,135 @@
+﻿@model  Review
+
+@{
+    ViewBag.Title = Model.ReviewTitle;
+    Layout = "~/Views/Shared/_Review.cshtml";
+    var profile = Model.Profile_Master.MemberMaster.Profile_Master.FirstOrDefault();
+}
+<div class="col-2 cop bpush avatar">
+    <a href="@Model.Profile_Master.MemberMaster.Cover_File.ToBase64String()">
+        <img src="@Model.Profile_Master.MemberMaster.Cover_File.ToBase64ImageString(135,135)" style="width: 100%;" alt="">
+    </a>
+    <p>
+        <i class="@Model.Profile_Master.MemberMaster.GetColor()"></i>
+        <a href="@Url.Action("Details", "Account", new { id = Model.Profile_Master.MemberMaster.Id})">@Model.Profile_Master.MemberMaster.GetFullName() / @Model.Subject</a>
+    </p>
+</div>
+
+<div class="col-10 cop bpush">
+    @if (profile != null && profile.Profile_Links.Any())
+    {
+        <div class="col-2">
+            <p class="b">Profile links:</p>
+        </div>
+        <div class="col-10">
+            @foreach (var link in profile.Profile_Links)
+            {
+                <p><a href="@link.LinkURL">@link.LinkTitle</a></p>
+            }
+        </div>
+        <div class="clearfix bpush"></div>
+    }
+
+    <div class="col-6">
+        <p><span class="b">Location: </span><span>@Model.Profile_Master.MemberMaster.GetLocation()</span></p>
+    </div>
+
+    <div class="col-6">
+        <p><span class="b">E-mail: </span><span><a href="mailto:@Model.Profile_Master.MemberMaster.Email_Login">@Model.Profile_Master.MemberMaster.Email_Login</a></span></p>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="btns-a bpush">
+        @if (MembershipHelper.Current.IsAuthenticated)
+        {
+            if (Model.Status_ReviewId != (long?)ReviewStatus.Pending)
+            {
+                switch ((ReviewStatus)Model.Status_ReviewId)
+                {
+                    case ReviewStatus.Active:
+                        <span class="alert-success">@Model.Status_Reviews.Name</span>
+                        break;
+
+                    case ReviewStatus.Trash:
+                    <span class="alert-danger">@Model.Status_Reviews.Name</span>
+                        break;
+                }
+
+            }
+            else
+            {
+                if (Model.Status_ReviewId != (long?)ReviewStatus.Active)
+                {
+                    <a href="@Url.Action("Reject", new {id = Model.Id})" onclick=" javascript: return confirm('Reject?'); " class="btn btn-blue">Report a Problem</a>
+                }
+                if (Model.Status_ReviewId != (long?)ReviewStatus.Active)
+                {
+                    <a href="@Url.Action("Accept", new {id = Model.Id})" onclick=" javascript: return confirm('Accept?'); " class="btn btn-blue">Make Request for Appointment</a>
+                }
+            }
+
+            <a href="@Url.Action("Review", "Message", new {id = Model.Id})" class="btn btn-blue">Send Message</a>
+        }
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="hr splitter-d bpush"></div>
+
+    <div class="table-responsive">
+
+        <table width="100%" class="table table-hover teacherstats">
+
+            <tr>
+                <th width="10%">Total Hours</th>
+                <th width="15%">Subject</th>
+                <th width="15%">Knowledge</th>
+                <th width="15%">Helpfulness</th>
+                <th width="15%">Passion</th>
+                <th width="20%">Communication</th>
+                <th width="10%">Overall</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>@Html.DisplayFor(model => model.Subject)</td>
+                <td>@Html.DisplayFor(model => model.Score_SubjectKnowledge)</td>
+                <td>@Html.DisplayFor(model => model.Score_Helpfullness)</td>
+                <td>@Html.DisplayFor(model => model.Score_Passion)</td>
+                <td>@Html.DisplayFor(model => model.Communication)</td>
+                <td>@Html.DisplayFor(model => model.Score_Overall)</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <hr class="splitter-d">
+
+    <p class="stand">Location: What was your overall experience with the tutor?</p>
+    <p class="bqt">
+        @Html.Raw(Model.ReviewSummary)
+    </p>
+    <p class="stand">Subject Knowledge:</p>
+    <p class="bqt">
+        @Html.Raw(Model.Description_SubjectKnowledge)
+    </p>
+    <p class="stand">Helpfulness</p>
+    <p class="bqt">
+        @Html.Raw(Model.Description_Helpfullness)
+    </p>
+    <p class="stand">Passion: Describe Tutors overall attitude in teaching this subject.</p>
+    <p class="bqt">
+        @Html.Raw(Model.Description_Passion)
+    </p>
+
+</div><!-- end col-10 -->
+@if (MembershipHelper.Current.IsAuthenticated &&
+    MembershipHelper.Current.IsMemberId(Model.Profile_Master.MemberId))
+{
+    <p>
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", onclick = "javascript:return confirm('Delete?');" })
+
+    </p>
+}

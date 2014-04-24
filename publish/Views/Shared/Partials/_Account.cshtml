@@ -1,0 +1,54 @@
+﻿@model RegisterViewModel
+
+<div class="group bpush main-page-form">
+    <p class="cpp orange-text pull-left">TutorFax Member Sign-Up</p>
+    <p class="cpp blue-text pull-right">Already Registered? <a href="@Url.Action("Login","Account")">Login Now!</a> </p>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form", @class = "form-orange" }))
+    {
+        <div class="col-12 cop oblock">
+
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true)
+
+            <div class="col-2">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.UserName) })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="col-2">
+                @Html.LabelFor(m => m.ConfirmUserName)
+                @Html.TextBoxFor(m => m.ConfirmUserName, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ConfirmUserName) })
+                @Html.ValidationMessageFor(m => m.ConfirmUserName)
+            </div>
+            <div class="col-2">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.Password) })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="col-2">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+            <div class="col-3">
+                @Html.LabelFor(m => m.RoleId)
+                @Html.DropDownList("RoleId", null, "Please select", new { @class = "form-control selectBox selectbox2 selectBox-dropdown" })
+                @Html.ValidationMessageFor(m => m.RoleId)
+
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+         <!-- end oblock -->
+        <div class="col-4 pull-right">
+            <label for="iagree">
+                <input type="checkbox" id="iagree" />
+                I agree to <a href="#">Terms and Conditions</a>
+            </label>
+            <button class="btn btn-orange" type="submit" id="btn-sign-up">Sign Up</button>
+        </div>
+    }
+
+</div>

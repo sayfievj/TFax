@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Review>
+@{
+    var perCount = 6;
+    var count = Model.Count();
+    var total = (int)Math.Ceiling((Decimal)count / perCount);
+}
+<h3 class="section-title">Top reviewed</h3>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @for (var i = 0; i < total; i++)
+        {
+            <li data-target="#myCarousel" data-slide-to="@i" @(i == 0 ? "class=active" : String.Empty)></li>
+        }
+    </ol>
+    <div class="carousel-inner group top-reviewed-container">
+
+        @for (var i = 0; i < total; i++)
+        {
+            <div class="item @(i==0?"active":String.Empty)">
+                @for (var j = 0; j < perCount && (i * perCount + j < count); j++)
+                {
+                    var index = i * perCount + j;
+                    var review = Model.ElementAt(index);
+                    <div class="col-2 cop ptac">
+                        <div class="cmm">
+                            <div class="group outim">
+                                <a href="@review.MemberMaster.Cover_File.ToBase64String()">
+                                    <img src="@review.MemberMaster.Cover_File.ToBase64ImageString(123,123)" alt="@review.MemberMaster.GetFullName()">
+                                    <i class="@review.MemberMaster.GetColor()"></i>
+                                </a>
+                            </div>
+                            <p class="b tac spaced"><a href="@Url.Action("Details", new { id = review.Id })">@review.MemberMaster.GetFullName() | @review.Subject</a></p>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<div class="clearfix"></div>

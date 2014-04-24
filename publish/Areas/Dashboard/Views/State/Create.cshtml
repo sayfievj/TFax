@@ -1,0 +1,17 @@
+﻿@model State
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("Partials/State/_Form")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

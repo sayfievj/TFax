@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Language>
+@{
+    var currentCulture = (Language)ViewBag.Culture;
+}
+<span>
+    <span class="bn">
+        <strong>Language</strong>
+    </span>
+</span>
+<span class="dropdown">
+    <a data-toggle="dropdown" class="dropdown-toggle" role="button" id="drop-lang" href="#">
+        @currentCulture.Name
+        <b class="caret"></b>
+    </a>
+    <ul aria-labelledby="drop-lang" role="menu" class="dropdown-menu">
+        @foreach (Language item in Model.Where(w => w.Id != currentCulture.Id))
+        {
+            <li role="presentation">
+                @Html.ActionLink(item.Name, "ChangeLanguage", new { returnUrl = Request.Url.PathAndQuery, id = item.Id }, new { tabindex = "-1", role = "menuitem" })
+            </li>
+        }
+    </ul>
+</span>

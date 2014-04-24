@@ -1,0 +1,32 @@
+﻿@model IPagedList<TextContent>
+@{
+    ViewBag.Title = "FAQ";
+}
+
+<table class="table-striped">
+    @{
+        int index = 0;
+        foreach (var item in Model)
+        {
+            index++;
+            <tr>
+                <td>
+                    @Html.GetPageContent(ContentPage.FAQ_PAGE_CONTENT, item.Id)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        Display = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 5,
+        UlElementClasses = new[] { "group t-page pull-right" }
+    })
+</div> 

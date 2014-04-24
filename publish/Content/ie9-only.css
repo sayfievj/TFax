@@ -1,0 +1,7 @@
+.gradient,
+.btn,
+.navbar-tf .navbar-nav a,
+.navbar-tf .navbar-nav a:hover,
+.navbar-tf .navbar-nav a:focus{
+  filter: none !important;
+}

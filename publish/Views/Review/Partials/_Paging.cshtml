@@ -1,0 +1,34 @@
+﻿@model  IPagedList<Review>
+
+<div class="traverse">
+    <div class="group">
+        <div class="col-4 spaced tal"><i class="red"></i> = Verified Tutors</div>
+        <div class="col-4 spaced tal">
+            <div class="col-6">
+                <label for="select-per-page" class="ib">Results per page</label><br>
+            </div>
+            <div class="col-6">
+                <select class="selectbox2" name="select-per-page" id="select-per-page" data-url="@Url.RouteUrl(new { page = 1 })">
+                    <option value="1">25</option>
+                    <option value="2">50</option>
+                    <option value="3">100</option>
+                    <option value="5">200</option>
+                    <option value="6">500</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="col-4 spaced">
+            @Html.PagedListPager(Model, page => Url.RouteUrl(new { page, size = Model.PageSize }), new PagedListRenderOptions
+            {
+                Display = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                UlElementClasses = new[] { "t-page pull-right" }
+            })
+        </div>
+    </div>
+</div>

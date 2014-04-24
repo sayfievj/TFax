@@ -1,0 +1,13 @@
+﻿@model IPagedList<State>
+
+@{
+    ViewBag.Title = "States";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.Partial("Partials/State/_List")
