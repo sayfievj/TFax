@@ -77,18 +77,21 @@ else
                     <div class="col-6">@Html.LabelFor(model => model.ReviewTitle, "Title", new { @class = "control-label" })</div>
                     <div class="col-6 cop">
                         @Html.TextBoxFor(model => model.ReviewTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ReviewTitle)
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="col-6"><label>Subject being reviewed</label></div>
                     <div class="col-6 cop">
-                        @Html.DropDownList("SubjectId", new SelectListItem[] { }, "Please select", new { @class = "selectbox2" })
+                        @Html.DropDownList("Subject",null, "Please select", new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Subject)
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="col-6">@Html.LabelFor(model => model.Subject_Detail, "Detail", new { @class = "control-label" })</div>
                     <div class="col-6 cop">
                         @Html.TextAreaFor(model => model.Subject_Detail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Subject_Detail)
                         <div class="clearfix"></div>
                     </div>
 
@@ -107,18 +110,21 @@ else
                     <div class="col-8"><label>Subject knowledge</label></div>
                     <div class="col-4 cop">
                         @Html.DropDownListFor(model => model.Score_SubjectKnowledge, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_SubjectKnowledge)
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="col-8"><label>Passion</label></div>
                     <div class="col-4 cop">
                         @Html.DropDownListFor(model => model.Score_Passion, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_Passion)
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="col-8"><label for="tutor-communication">Communication</label></div>
                     <div class="col-4 cop">
                         @Html.DropDownListFor(model => model.Communication, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Communication)
                         <div class="clearfix"></div>
 
                     </div>
@@ -126,6 +132,7 @@ else
                     <div class="col-8"><label for="tutor-overall">tutor-overall</label></div>
                     <div class="col-4 cop">
                         @Html.DropDownListFor(model => model.Score_Overall, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_Overall)
                         <div class="clearfix"></div>
                     </div>
 
@@ -138,26 +145,32 @@ else
                 <p class="stand">Location: What was your overall experience with the tutor?</p>
                 <p class="bqt2">
                     @Html.TextAreaFor(model => model.ReviewSummary, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.ReviewSummary)
                 </p>
 
                 <p class="stand">Subject Knowledge:</p>
                 <p class="bqt2">
                     @Html.TextAreaFor(model => model.Description_SubjectKnowledge, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_SubjectKnowledge)
                 </p>
 
                 <p class="stand">Helpfulness</p>
                 <p class="bqt2">
                     @Html.TextAreaFor(model => model.Description_Helpfullness, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_Helpfullness)
+
                 </p>
 
                 <p class="stand">Passion: Describe Tutors overall attitude in teaching this subject.</p>
                 <p class="bqt2">
                     @Html.TextAreaFor(model => model.Description_Passion, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_Passion)
+
                 </p>
 
                 <p class="stand">Communication</p>
                 <p class="bqt2">
-                    @Html.TextArea("Communication", new { @class = "form-control limit-w" })
+                    @Html.TextArea("Description_Communication", new { @class = "form-control limit-w" })
                 </p>
 
                 <p class="bqt2 spaced2 tac"><button type="submit" class="btn btn-blue btn-olg">Submit this Review</button></p>

@@ -10,7 +10,7 @@ textarea {
 /* styles for validation helpers */
 
 .field-validation-error {
-    color: #b94a48;
+    color: #b94a48 !important;
 }
 
 .field-validation-valid {
@@ -19,8 +19,9 @@ textarea {
 
 textarea.input-validation-error,
 select.input-validation-error,
-input.input-validation-error {
-    border: 1px solid #b94a48;
+input.input-validation-error,
+textarea.input-validation-error {
+    border: 1px solid #b94a48 !important;
 }
 
 input[type="checkbox"].input-validation-error {
@@ -28,11 +29,9 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
-    color: #b94a48;
+    color: #b94a48 !important;
 }
 
 .validation-summary-valid {
     display: none;
 }
-
- 

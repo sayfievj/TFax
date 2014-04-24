@@ -105,11 +105,12 @@ namespace TFax.Web.Controllers
         }
 
         public ActionResult Submit()
-        { 
+        {
             var review = new Review();
             var model = Mapper.Map<ReviewViewModel>(review);
 
             ViewBag.Member = MembershipHelper.Current.GetMember();
+            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Id", "Subject");
 
             return View(model);
         }
@@ -138,6 +139,7 @@ namespace TFax.Web.Controllers
             ModelState.AddModelError("", "An error has occurred.");
 
             ViewBag.Member = MembershipHelper.Current.GetMember();
+            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Subject", "Subject");
 
             return View(model);
         }
@@ -148,10 +150,11 @@ namespace TFax.Web.Controllers
 
             if (review == null)
                 return new HttpNotFoundResult();
-             
+
             var model = Mapper.Map<ReviewViewModel>(review);
 
             ViewBag.Member = MembershipHelper.Current.GetMember();
+            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Subject", "Subject", review.Subject);
 
             return View(model);
         }
@@ -165,7 +168,7 @@ namespace TFax.Web.Controllers
             {
                 var review = DbRepository.Find(id);
 
-                Mapper.Map(model,review);
+                Mapper.Map(model, review);
 
                 review.ModifiedDate = DateTime.Now;
                 review.ModifiedIP = UtilHelper.GetVisitorIPAddress();
@@ -178,8 +181,9 @@ namespace TFax.Web.Controllers
             }
 
             ModelState.AddModelError("", "An error has occurred.");
-            
+
             ViewBag.Member = MembershipHelper.Current.GetMember();
+            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Subject", "Subject", model.Subject);
 
             return View(model);
         }
