@@ -10,7 +10,7 @@ namespace TFax.Web
 {
     public class AutoMapperConfig
     {
-
+         
         public static void Initialize()
         {
 
