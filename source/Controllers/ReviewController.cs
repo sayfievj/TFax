@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using PagedList;
 using TFax.Web.CORE;
 using TFax.Web.CORE.BLL.Security;
@@ -104,14 +105,14 @@ namespace TFax.Web.Controllers
         }
 
         public ActionResult Submit()
-        {
-            var model = new ReviewViewModel
-            {
-                Member = MembershipHelper.Current.GetMember(),
-                Review = new Review()
-            };
+        { 
+            var review = new Review();
+            var model = Mapper.Map<ReviewViewModel>(review);
+
+            ViewBag.Member = MembershipHelper.Current.GetMember();
+
             return View(model);
-        } 
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,12 +121,14 @@ namespace TFax.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Review.ProfileId = MembershipHelper.Current.ProfileId;
-                model.Review.CreatedDate = DateTime.Now;
-                model.Review.CreatedIP = UtilHelper.GetVisitorIPAddress();
-                model.Review.Status_ReviewId = (int)ReviewStatus.Pending;
+                var review = Mapper.Map<Review>(model);
 
-                DbRepository.Insert(model.Review);
+                review.ProfileId = MembershipHelper.Current.ProfileId;
+                review.CreatedDate = DateTime.Now;
+                review.CreatedIP = UtilHelper.GetVisitorIPAddress();
+                review.Status_ReviewId = (int)ReviewStatus.Pending;
+
+                DbRepository.Insert(review);
 
                 TempData["ReviewStatus"] = String.Format("Your message has been saved.Please wait to if approving an {0} administration", AppSettings.APP_TITLE);
 
@@ -133,6 +136,8 @@ namespace TFax.Web.Controllers
             }
 
             ModelState.AddModelError("", "An error has occurred.");
+
+            ViewBag.Member = MembershipHelper.Current.GetMember();
 
             return View(model);
         }
@@ -143,12 +148,10 @@ namespace TFax.Web.Controllers
 
             if (review == null)
                 return new HttpNotFoundResult();
+             
+            var model = Mapper.Map<ReviewViewModel>(review);
 
-            var model = new ReviewViewModel
-            {
-                Member = MembershipHelper.Current.GetMember(),
-                Review = review
-            };
+            ViewBag.Member = MembershipHelper.Current.GetMember();
 
             return View(model);
         }
@@ -160,10 +163,14 @@ namespace TFax.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Review.ModifiedDate = DateTime.Now;
-                model.Review.ModifiedIP = UtilHelper.GetVisitorIPAddress();
+                var review = DbRepository.Find(id);
 
-                DbRepository.Update(model.Review);
+                Mapper.Map(model,review);
+
+                review.ModifiedDate = DateTime.Now;
+                review.ModifiedIP = UtilHelper.GetVisitorIPAddress();
+
+                DbRepository.Update(review);
 
                 TempData["ReviewStatus"] = String.Format("Your review modifying successfully.");
 
@@ -171,6 +178,8 @@ namespace TFax.Web.Controllers
             }
 
             ModelState.AddModelError("", "An error has occurred.");
+            
+            ViewBag.Member = MembershipHelper.Current.GetMember();
 
             return View(model);
         }

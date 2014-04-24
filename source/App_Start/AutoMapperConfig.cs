@@ -10,14 +10,15 @@ namespace TFax.Web
 {
     public class AutoMapperConfig
     {
-         
+
         public static void Initialize()
         {
 
             //poco 
-            Mapper.CreateMap<MemberMaster, MemberViewModel>() 
+            Mapper.CreateMap<MemberMaster, MemberViewModel>()
                   .ReverseMap();
-
+            Mapper.CreateMap<Review, ReviewViewModel>()
+                .ReverseMap();
 
             //value
             Mapper.AllowNullDestinationValues = true;
