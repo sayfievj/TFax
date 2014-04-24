@@ -1,0 +1,65 @@
+﻿@model IPagedList<HTTPTraceListener>
+
+@{
+    ViewBag.Title = "HTTP Trace listeners"; 
+}
+ 
+<table class="table-striped">
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            URL
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            User Name
+        </th>
+        <th>
+            User host address
+        </th>
+        <th>
+            Message
+        </th> 
+    </tr>
+
+    @foreach (HTTPTraceListener item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink(item.RequestUrl, "Details", new {id = item.Id})
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserHostAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraceMessage)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page}), new PagedListRenderOptions
+    {
+        Display = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayPageCountAndCurrentLocation = true
+    })
+</div>

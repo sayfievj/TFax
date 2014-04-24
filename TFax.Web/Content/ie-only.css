@@ -1,0 +1,44 @@
+i.red, i.green {
+    margin: 0 4px -1px 0;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(../Images/apples_2.png) no-repeat top left;
+    background-size: 20px 40px;
+}
+
+i.red {
+    background-position: 0 0;
+}
+
+i.green {
+    background-position: 0 -20px;
+}
+
+.navbar-nav {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.bannertext {
+    background-image: none;
+    background: #13143E !important;
+}
+
+.tf-logo-ie {
+    display: block !important;
+    margin: 20px 0 16px;
+}
+
+.tf-logo {
+    display: none !important;
+}
+
+.moa {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.arrow-o > a:after {
+    display: none;
+}

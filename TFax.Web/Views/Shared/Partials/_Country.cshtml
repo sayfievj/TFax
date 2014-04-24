@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Country>
+
+<div class="group country-boxx">
+
+    @foreach (Country country in Model)
+    {
+        <h3 class="country-t">
+            @country.Name
+        </h3>
+        <hr class="country-splitter" />
+        <p class="comt">ACHTUNG! This massive list is under construction! <i>(please populate this. The list structure is very simple: jus one MASSIVE ul that contain 50 more uls in lis)</i>. Feel free to remove this comment</p>
+        <div class="regions-all">
+            <div class="massive">
+                <div class="cf"></div>
+                <ul class="split-six">
+                    @foreach (State state in country.States)
+                    {
+                        <li>
+                            <h4>
+                                @state.Name
+                            </h4>
+                            <ul>
+                                @foreach (City city in state.Cities)
+                                {
+                                    <li>
+                                        <a href="#">@city.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    <div class="clearfix"></div>
+
+</div>
+
+
+<div class="country-box">
+
+    <div class="row zero">
+        <form class="form" role="form" method="POST" action="">
+            <legend>Select location</legend>
+            <div class="clearfix"></div>
+            <div class="col-3 cop item-s">
+                <div class="cmm">
+
+                    @Html.DropDownList("Country", new SelectList(Model, "Id", "Name").ToList(), "All countries", new { @class = "selectbox2"})
+
+                </div>
+            </div> <!-- end item-s -->
+            <div class="col-3 cop item-s">
+                <div class="cmm">
+
+                    @Html.DropDownList("State", new SelectList(Model.SelectMany(s => s.States), "Id", "Name").ToList(), "All States", new { @class = "selectbox2"})
+
+                </div>
+            </div> <!-- end item-s -->
+            <div class="col-3 cop item-s">
+                <div class="cmm">
+
+                    @Html.DropDownList("City", new SelectList(Model.SelectMany(s => s.States).SelectMany(s => s.Cities), "Id", "Name").ToList(), "All cities", new { @class = "selectbox2"})
+
+                </div>
+            </div> <!-- end item-s -->
+            <div class="col-3 cop item-s">
+                <div class="cmm">
+
+
+                    <button class="btn btn-blue btn-block " type="submit">Go!</button>
+
+                </div>
+            </div> <!-- end item-s -->
+
+
+        </form>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>

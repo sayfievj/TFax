@@ -1,0 +1,26 @@
+﻿<div class="legion">
+    <nav class="navbar navbar-tf" role="navigation">
+        <div id="navcollapse1" class="collapse navbar-collapse cop">
+            <ul class="nav navbar-nav" id="site-navbar" data-url="_@(ViewContext.RouteData.Values["controller"])_@(ViewContext.RouteData.Values["action"])_">
+                <li data-url="_Home_Index_">@Html.ActionLink("Home", "Index", "Home")</li>
+                <li data-url="_Review_New_">@Html.ActionLink("New Review", "New", "Review")</li>
+                <li data-url="_MemberMaster_Search_">@Html.ActionLink("Search Tutor", "Search", "MemberMaster")</li>
+                <li data-url="_Review_Seek_">@Html.ActionLink("Seeking Review", "Seek", "Review")</li>
+                @if (MembershipHelper.Current.IsAuthenticated)
+                {
+                    <li data-url="_Message_Index_">@Html.ActionLink("Messaging", "Index", "Message")</li>
+                }
+                <li data-url="_FAQ_Index_">@Html.ActionLink("FAQ", "Index", "FAQ")</li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (MembershipHelper.Current.IsAuthenticated &&
+                    MembershipHelper.Current.CheckRole(Role.Admin))
+                {
+                    <li class="blue">@Html.ActionLink("Dashboard", "Index", "Home", new { area = "Dashboard" }, null)</li>
+                }
+                <li class="blue">@Html.ActionLink("Submit a review", "Submit", "Review")</li>
+            </ul>
+        </div>
+    </nav>
+</div> 

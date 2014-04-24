@@ -1,0 +1,14 @@
+﻿@model IPagedList<TextContent>
+
+@{
+    ViewBag.Title = "FAQs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p> 
+
+@Html.Partial("Partials/TextContent/_List")
+  

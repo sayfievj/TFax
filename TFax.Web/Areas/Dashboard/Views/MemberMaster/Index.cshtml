@@ -1,0 +1,13 @@
+﻿@model IPagedList<MemberMaster>
+
+@{
+    ViewBag.Title = "MemberMasters";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.Partial("Partials/MemberMaster/_List")

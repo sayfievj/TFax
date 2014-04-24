@@ -1,0 +1,2056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TFaxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="CountryId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="CodeISO3" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HTTPTraceListeners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestUrl" Type="nvarchar(max)" />
+          <Property Name="TraceMessage" Type="ntext" />
+          <Property Name="TraceDate" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="250" />
+          <Property Name="UserHostAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserAgent" Type="nvarchar(max)" />
+          <Property Name="UserHostName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Log_MemberActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogId" Type="bigint" />
+          <Property Name="MemberId" Type="bigint" />
+          <Property Name="MemberEmail" Type="nvarchar(max)" />
+          <Property Name="MemberName" Type="nvarchar(max)" />
+          <Property Name="VisitedIP" Type="nvarchar(max)" />
+          <Property Name="SessionID" Type="nvarchar(max)" />
+          <Property Name="VisitedRawURL" Type="nvarchar(max)" />
+          <Property Name="ReferredURL" Type="nvarchar(max)" />
+          <Property Name="LoggedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Log_MemberMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogId" Type="bigint" />
+          <Property Name="Email_Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="CityId" Type="bigint" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="CountryId" Type="bigint" />
+          <Property Name="Status_Email" Type="nvarchar(max)" />
+          <Property Name="Status_Member" Type="nvarchar(max)" />
+          <Property Name="MemberClass" Type="nvarchar(max)" />
+          <Property Name="RegisteredDate" Type="datetime" />
+          <Property Name="RegisteredIP" Type="nvarchar(max)" />
+          <Property Name="ActivationCode" Type="nvarchar(max)" />
+          <Property Name="ActivationCodeExpired" Type="datetime" />
+          <Property Name="LoggedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Log_MemberSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogId" Type="bigint" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" Nullable="false" />
+          <Property Name="VisitedIP" Type="nvarchar(max)" />
+          <Property Name="SessionID" Type="nvarchar(max)" />
+          <Property Name="SessionIn" Type="datetime" />
+          <Property Name="LogIn" Type="datetime" />
+          <Property Name="LogOut" Type="datetime" />
+          <Property Name="SessionOut" Type="datetime" />
+          <Property Name="ReferredURL" Type="nvarchar(max)" />
+          <Property Name="VisitedURL" Type="nvarchar(max)" />
+          <Property Name="VisitedCity" Type="nvarchar(max)" />
+          <Property Name="VisitedCountry" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MemberMasters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Cover_File" Type="varbinary(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="CityId" Type="bigint" />
+          <Property Name="StateId" Type="bigint" />
+          <Property Name="CountryId" Type="bigint" />
+          <Property Name="Status_Email" Type="nvarchar(max)" />
+          <Property Name="Status_MemberId" Type="bigint" />
+          <Property Name="MemberClass" Type="nvarchar(max)" />
+          <Property Name="RegisteredDate" Type="datetime" />
+          <Property Name="RegisteredIP" Type="nvarchar(max)" />
+          <Property Name="ActivationCode" Type="nvarchar(max)" />
+          <Property Name="ActivationCodeExpired" Type="datetime" />
+          <Property Name="IsActivated" Type="bit" />
+          <Property Name="MemberRoleId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MemberRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MyFavorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerID" Type="bigint" />
+          <Property Name="ProfileID" Type="bigint" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MyMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToId" Type="bigint" />
+          <Property Name="CcId" Type="bigint" />
+          <Property Name="SenderId" Type="bigint" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="BodyText" Type="nvarchar(max)" />
+          <Property Name="DateSent" Type="datetime" />
+          <Property Name="DateRead" Type="datetime" />
+          <Property Name="DateDelete" Type="datetime" />
+          <Property Name="StatusReadId" Type="bigint" />
+          <Property Name="StatusDeleteId" Type="bigint" />
+          <Property Name="StatusLabelId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Profile_EduBackground">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" />
+          <Property Name="College_University" Type="nvarchar(max)" />
+          <Property Name="GraduateYear" Type="nvarchar(max)" />
+          <Property Name="Major" Type="nvarchar(max)" />
+          <Property Name="Degree" Type="nvarchar(max)" />
+          <Property Name="Proof_Title" Type="nvarchar(max)" />
+          <Property Name="Proof_File" Type="varbinary(max)" />
+          <Property Name="Status_EduBackgroundId" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Profile_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileId" Type="bigint" />
+          <Property Name="LinkTitle" Type="nvarchar(max)" />
+          <Property Name="LinkURL" Type="nvarchar(max)" />
+          <Property Name="Status_LinkId" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Profile_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" />
+          <Property Name="OnlineTutoring" Type="nvarchar(max)" />
+          <Property Name="OnsiteTutoring" Type="nvarchar(max)" />
+          <Property Name="Travel" Type="int" />
+          <Property Name="TravelUnit" Type="nvarchar(max)" />
+          <Property Name="TutoringExperience" Type="nvarchar(max)" />
+          <Property Name="TutoringGrade" Type="nvarchar(max)" />
+          <Property Name="HourlyFee" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CurrencyUnit" Type="nvarchar(max)" />
+          <Property Name="CancellationPolicy" Type="nvarchar(max)" />
+          <Property Name="OverallRating" Type="float" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Profile_Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileId" Type="bigint" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Representative" Type="nvarchar(max)" />
+          <Property Name="Status_SubjectId" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfileId" Type="bigint" />
+          <Property Name="ReviewerId" Type="bigint" />
+          <Property Name="ReviewDate" Type="datetime" />
+          <Property Name="ReviewTitle" Type="nvarchar(max)" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="Subject_Detail" Type="nvarchar(max)" />
+          <Property Name="SessionLocation" Type="nvarchar(max)" />
+          <Property Name="SessionDate" Type="nvarchar(max)" />
+          <Property Name="SessionHours" Type="nvarchar(max)" />
+          <Property Name="ReviewSummary" Type="nvarchar(max)" />
+          <Property Name="Description_SubjectKnowledge" Type="nvarchar(max)" />
+          <Property Name="Description_Helpfullness" Type="nvarchar(max)" />
+          <Property Name="Description_Passion" Type="nvarchar(max)" />
+          <Property Name="Score_SubjectKnowledge" Type="int" />
+          <Property Name="Score_Helpfullness" Type="int" />
+          <Property Name="Score_Passion" Type="int" />
+          <Property Name="Score_Overall" Type="int" />
+          <Property Name="Status_Screen" Type="nvarchar(max)" />
+          <Property Name="Status_Show" Type="nvarchar(max)" />
+          <Property Name="Status_ReviewId" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="ModifiedIP" Type="nvarchar(max)" />
+          <Property Name="Communication" Type="int" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Status_EduBackground">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Decription" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Status_TextContents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TextContents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageID" Type="nvarchar(max)" />
+          <Property Name="LanguageId" Type="bigint" />
+          <Property Name="TitleHTML" Type="nvarchar(max)" />
+          <Property Name="BodyHTML" Type="nvarchar(max)" />
+          <Property Name="StatusId" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedIP" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_States">
+          <End Role="States" Type="Self.States" Multiplicity="0..1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMasters">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMasters">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_MemberRoles">
+          <End Role="MemberRoles" Type="Self.MemberRoles" Multiplicity="0..1" />
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMasters">
+              <PropertyRef Name="MemberRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_States">
+          <End Role="States" Type="Self.States" Multiplicity="0..1" />
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMasters">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Status_Members">
+          <End Role="Status_Members" Type="Self.Status_Members" Multiplicity="0..1" />
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMasters">
+              <PropertyRef Name="Status_MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyFavorites_MemberMasters2">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="MyFavorites" Type="Self.MyFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyFavorites">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyFavorites_Profile_Master">
+          <End Role="Profile_Master" Type="Self.Profile_Master" Multiplicity="0..1" />
+          <End Role="MyFavorites" Type="Self.MyFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyFavorites">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters1">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="CcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters2">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages">
+          <End Role="Status_Messages" Type="Self.Status_Messages" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="StatusDeleteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages1">
+          <End Role="Status_Messages" Type="Self.Status_Messages" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="StatusLabelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages2">
+          <End Role="Status_Messages" Type="Self.Status_Messages" Multiplicity="0..1" />
+          <End Role="MyMessages" Type="Self.MyMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessages">
+              <PropertyRef Name="StatusReadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_EduBackground_MemberMasters">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="Profile_EduBackground" Type="Self.Profile_EduBackground" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_EduBackground">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_EduBackground_Status_EduBackground">
+          <End Role="Status_EduBackground" Type="Self.Status_EduBackground" Multiplicity="0..1" />
+          <End Role="Profile_EduBackground" Type="Self.Profile_EduBackground" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_EduBackground">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_EduBackground">
+              <PropertyRef Name="Status_EduBackgroundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Links_Profile_Master">
+          <End Role="Profile_Master" Type="Self.Profile_Master" Multiplicity="0..1" />
+          <End Role="Profile_Links" Type="Self.Profile_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Links">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Links_Status_Links">
+          <End Role="Status_Links" Type="Self.Status_Links" Multiplicity="0..1" />
+          <End Role="Profile_Links" Type="Self.Profile_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Links">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Links">
+              <PropertyRef Name="Status_LinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Master_MemberMasters">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="Profile_Master" Type="Self.Profile_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Master">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Subjects_Profile_Master">
+          <End Role="Profile_Master" Type="Self.Profile_Master" Multiplicity="0..1" />
+          <End Role="Profile_Subjects" Type="Self.Profile_Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Subjects">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Subjects_Status_Subjects">
+          <End Role="Status_Subjects" Type="Self.Status_Subjects" Multiplicity="0..1" />
+          <End Role="Profile_Subjects" Type="Self.Profile_Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Subjects">
+              <PropertyRef Name="Status_SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_MemberMasters">
+          <End Role="MemberMasters" Type="Self.MemberMasters" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMasters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ReviewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Profile_Master">
+          <End Role="Profile_Master" Type="Self.Profile_Master" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Status_Reviews">
+          <End Role="Status_Reviews" Type="Self.Status_Reviews" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Reviews">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="Status_ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="States" Type="Self.States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextContents_Languages">
+          <End Role="Languages" Type="Self.Languages" Multiplicity="0..1" />
+          <End Role="TextContents" Type="Self.TextContents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Languages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextContents">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextContents_TextContents">
+          <End Role="Status_TextContents" Type="Self.Status_TextContents" Multiplicity="0..1" />
+          <End Role="TextContents" Type="Self.TextContents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_TextContents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextContents">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TFaxModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HTTPTraceListeners" EntityType="Self.HTTPTraceListeners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_MemberActivity" EntityType="Self.Log_MemberActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_MemberMaster" EntityType="Self.Log_MemberMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_MemberSession" EntityType="Self.Log_MemberSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberMasters" EntityType="Self.MemberMasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberRoles" EntityType="Self.MemberRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyFavorites" EntityType="Self.MyFavorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MyMessages" EntityType="Self.MyMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile_EduBackground" EntityType="Self.Profile_EduBackground" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile_Links" EntityType="Self.Profile_Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile_Master" EntityType="Self.Profile_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile_Subjects" EntityType="Self.Profile_Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_EduBackground" EntityType="Self.Status_EduBackground" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Links" EntityType="Self.Status_Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Members" EntityType="Self.Status_Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Messages" EntityType="Self.Status_Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Reviews" EntityType="Self.Status_Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Subjects" EntityType="Self.Status_Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_TextContents" EntityType="Self.Status_TextContents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TextContents" EntityType="Self.TextContents" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_States" Association="Self.FK_Cities_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Cities" Association="Self.FK_MemberMasters_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Countries" Association="Self.FK_MemberMasters_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_MemberRoles" Association="Self.FK_MemberMasters_MemberRoles">
+            <End Role="MemberRoles" EntitySet="MemberRoles" />
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_States" Association="Self.FK_MemberMasters_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Status_Members" Association="Self.FK_MemberMasters_Status_Members">
+            <End Role="Status_Members" EntitySet="Status_Members" />
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyFavorites_MemberMasters2" Association="Self.FK_MyFavorites_MemberMasters2">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="MyFavorites" EntitySet="MyFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyFavorites_Profile_Master" Association="Self.FK_MyFavorites_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="MyFavorites" EntitySet="MyFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters" Association="Self.FK_MyMessages_MemberMasters">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters1" Association="Self.FK_MyMessages_MemberMasters1">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters2" Association="Self.FK_MyMessages_MemberMasters2">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages" Association="Self.FK_MyMessages_Status_Messages">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages1" Association="Self.FK_MyMessages_Status_Messages1">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages2" Association="Self.FK_MyMessages_Status_Messages2">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessages" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_EduBackground_MemberMasters" Association="Self.FK_Profile_EduBackground_MemberMasters">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="Profile_EduBackground" EntitySet="Profile_EduBackground" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_EduBackground_Status_EduBackground" Association="Self.FK_Profile_EduBackground_Status_EduBackground">
+            <End Role="Status_EduBackground" EntitySet="Status_EduBackground" />
+            <End Role="Profile_EduBackground" EntitySet="Profile_EduBackground" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Links_Profile_Master" Association="Self.FK_Profile_Links_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Profile_Links" EntitySet="Profile_Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Links_Status_Links" Association="Self.FK_Profile_Links_Status_Links">
+            <End Role="Status_Links" EntitySet="Status_Links" />
+            <End Role="Profile_Links" EntitySet="Profile_Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Master_MemberMasters" Association="Self.FK_Profile_Master_MemberMasters">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Subjects_Profile_Master" Association="Self.FK_Profile_Subjects_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Profile_Subjects" EntitySet="Profile_Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Subjects_Status_Subjects" Association="Self.FK_Profile_Subjects_Status_Subjects">
+            <End Role="Status_Subjects" EntitySet="Status_Subjects" />
+            <End Role="Profile_Subjects" EntitySet="Profile_Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_MemberMasters" Association="Self.FK_Reviews_MemberMasters">
+            <End Role="MemberMasters" EntitySet="MemberMasters" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Profile_Master" Association="Self.FK_Reviews_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Status_Reviews" Association="Self.FK_Reviews_Status_Reviews">
+            <End Role="Status_Reviews" EntitySet="Status_Reviews" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Countries" Association="Self.FK_States_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextContents_Languages" Association="Self.FK_TextContents_Languages">
+            <End Role="Languages" EntitySet="Languages" />
+            <End Role="TextContents" EntitySet="TextContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextContents_TextContents" Association="Self.FK_TextContents_TextContents">
+            <End Role="Status_TextContents" EntitySet="Status_TextContents" />
+            <End Role="TextContents" EntitySet="TextContents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TFaxModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TFaxEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="TFaxModel.City" />
+          <EntitySet Name="Countries" EntityType="TFaxModel.Country" />
+          <EntitySet Name="HTTPTraceListeners" EntityType="TFaxModel.HTTPTraceListener" />
+          <EntitySet Name="Languages" EntityType="TFaxModel.Language" />
+          <EntitySet Name="Log_MemberActivity" EntityType="TFaxModel.Log_MemberActivity" />
+          <EntitySet Name="Log_MemberMaster" EntityType="TFaxModel.Log_MemberMaster" />
+          <EntitySet Name="Log_MemberSession" EntityType="TFaxModel.Log_MemberSession" />
+          <EntitySet Name="MemberMasters" EntityType="TFaxModel.MemberMaster" />
+          <EntitySet Name="MemberRoles" EntityType="TFaxModel.MemberRole" />
+          <EntitySet Name="MyFavorites" EntityType="TFaxModel.MyFavorite" />
+          <EntitySet Name="MyMessages" EntityType="TFaxModel.MyMessage" />
+          <EntitySet Name="Profile_EduBackground" EntityType="TFaxModel.Profile_EduBackground" />
+          <EntitySet Name="Profile_Links" EntityType="TFaxModel.Profile_Links" />
+          <EntitySet Name="Profile_Master" EntityType="TFaxModel.Profile_Master" />
+          <EntitySet Name="Profile_Subjects" EntityType="TFaxModel.Profile_Subjects" />
+          <EntitySet Name="Reviews" EntityType="TFaxModel.Review" />
+          <EntitySet Name="States" EntityType="TFaxModel.State" />
+          <EntitySet Name="Status_EduBackground" EntityType="TFaxModel.Status_EduBackground" />
+          <EntitySet Name="Status_Links" EntityType="TFaxModel.Status_Links" />
+          <EntitySet Name="Status_Members" EntityType="TFaxModel.Status_Members" />
+          <EntitySet Name="Status_Messages" EntityType="TFaxModel.Status_Messages" />
+          <EntitySet Name="Status_Reviews" EntityType="TFaxModel.Status_Reviews" />
+          <EntitySet Name="Status_Subjects" EntityType="TFaxModel.Status_Subjects" />
+          <EntitySet Name="Status_TextContents" EntityType="TFaxModel.Status_TextContents" />
+          <EntitySet Name="TextContents" EntityType="TFaxModel.TextContent" />
+          <AssociationSet Name="FK_Cities_Countries" Association="TFaxModel.FK_Cities_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_States" Association="TFaxModel.FK_Cities_States">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Cities" Association="TFaxModel.FK_MemberMasters_Cities">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Countries" Association="TFaxModel.FK_MemberMasters_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_States_Countries" Association="TFaxModel.FK_States_Countries">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextContents_Languages" Association="TFaxModel.FK_TextContents_Languages">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="TextContent" EntitySet="TextContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_MemberRoles" Association="TFaxModel.FK_MemberMasters_MemberRoles">
+            <End Role="MemberRole" EntitySet="MemberRoles" />
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_States" Association="TFaxModel.FK_MemberMasters_States">
+            <End Role="State" EntitySet="States" />
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberMasters_Status_Members" Association="TFaxModel.FK_MemberMasters_Status_Members">
+            <End Role="Status_Members" EntitySet="Status_Members" />
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyFavorites_MemberMasters2" Association="TFaxModel.FK_MyFavorites_MemberMasters2">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="MyFavorite" EntitySet="MyFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters" Association="TFaxModel.FK_MyMessages_MemberMasters">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters1" Association="TFaxModel.FK_MyMessages_MemberMasters1">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_MemberMasters2" Association="TFaxModel.FK_MyMessages_MemberMasters2">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_EduBackground_MemberMasters" Association="TFaxModel.FK_Profile_EduBackground_MemberMasters">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="Profile_EduBackground" EntitySet="Profile_EduBackground" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Master_MemberMasters" Association="TFaxModel.FK_Profile_Master_MemberMasters">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_MemberMasters" Association="TFaxModel.FK_Reviews_MemberMasters">
+            <End Role="MemberMaster" EntitySet="MemberMasters" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyFavorites_Profile_Master" Association="TFaxModel.FK_MyFavorites_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="MyFavorite" EntitySet="MyFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages" Association="TFaxModel.FK_MyMessages_Status_Messages">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages1" Association="TFaxModel.FK_MyMessages_Status_Messages1">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MyMessages_Status_Messages2" Association="TFaxModel.FK_MyMessages_Status_Messages2">
+            <End Role="Status_Messages" EntitySet="Status_Messages" />
+            <End Role="MyMessage" EntitySet="MyMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_EduBackground_Status_EduBackground" Association="TFaxModel.FK_Profile_EduBackground_Status_EduBackground">
+            <End Role="Status_EduBackground" EntitySet="Status_EduBackground" />
+            <End Role="Profile_EduBackground" EntitySet="Profile_EduBackground" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Links_Profile_Master" Association="TFaxModel.FK_Profile_Links_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Profile_Links" EntitySet="Profile_Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Links_Status_Links" Association="TFaxModel.FK_Profile_Links_Status_Links">
+            <End Role="Status_Links" EntitySet="Status_Links" />
+            <End Role="Profile_Links" EntitySet="Profile_Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Subjects_Profile_Master" Association="TFaxModel.FK_Profile_Subjects_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Profile_Subjects" EntitySet="Profile_Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Profile_Master" Association="TFaxModel.FK_Reviews_Profile_Master">
+            <End Role="Profile_Master" EntitySet="Profile_Master" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_Subjects_Status_Subjects" Association="TFaxModel.FK_Profile_Subjects_Status_Subjects">
+            <End Role="Status_Subjects" EntitySet="Status_Subjects" />
+            <End Role="Profile_Subjects" EntitySet="Profile_Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Status_Reviews" Association="TFaxModel.FK_Reviews_Status_Reviews">
+            <End Role="Status_Reviews" EntitySet="Status_Reviews" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TextContents_TextContents" Association="TFaxModel.FK_TextContents_TextContents">
+            <End Role="Status_TextContents" EntitySet="Status_TextContents" />
+            <End Role="TextContent" EntitySet="TextContents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="CountryId" Type="Int64" />
+          <NavigationProperty Name="Country" Relationship="TFaxModel.FK_Cities_Countries" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="State" Relationship="TFaxModel.FK_Cities_States" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="MemberMasters" Relationship="TFaxModel.FK_MemberMasters_Cities" FromRole="City" ToRole="MemberMaster" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CodeISO3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cities" Relationship="TFaxModel.FK_Cities_Countries" FromRole="Country" ToRole="City" />
+          <NavigationProperty Name="MemberMasters" Relationship="TFaxModel.FK_MemberMasters_Countries" FromRole="Country" ToRole="MemberMaster" />
+          <NavigationProperty Name="States" Relationship="TFaxModel.FK_States_Countries" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="HTTPTraceListener">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TraceMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TraceDate" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UserHostAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserHostName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TextContents" Relationship="TFaxModel.FK_TextContents_Languages" FromRole="Language" ToRole="TextContent" />
+        </EntityType>
+        <EntityType Name="Log_MemberActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogId" Type="Int64" />
+          <Property Name="MemberId" Type="Int64" />
+          <Property Name="MemberEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitedRawURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReferredURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoggedTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Log_MemberMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogId" Type="Int64" />
+          <Property Name="Email_Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int64" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="CountryId" Type="Int64" />
+          <Property Name="Status_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Member" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredDate" Type="DateTime" Precision="3" />
+          <Property Name="RegisteredIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCodeExpired" Type="DateTime" Precision="3" />
+          <Property Name="LoggedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Log_MemberSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogId" Type="Int64" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" Nullable="false" />
+          <Property Name="VisitedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionIn" Type="DateTime" Precision="3" />
+          <Property Name="LogIn" Type="DateTime" Precision="3" />
+          <Property Name="LogOut" Type="DateTime" Precision="3" />
+          <Property Name="SessionOut" Type="DateTime" Precision="3" />
+          <Property Name="ReferredURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitedURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitedCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitedCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MemberMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cover_File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int64" />
+          <Property Name="StateId" Type="Int64" />
+          <Property Name="CountryId" Type="Int64" />
+          <Property Name="Status_Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_MemberId" Type="Int64" />
+          <Property Name="MemberClass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegisteredDate" Type="DateTime" Precision="3" />
+          <Property Name="RegisteredIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCodeExpired" Type="DateTime" Precision="3" />
+          <Property Name="IsActivated" Type="Boolean" />
+          <Property Name="MemberRoleId" Type="Int64" />
+          <NavigationProperty Name="City" Relationship="TFaxModel.FK_MemberMasters_Cities" FromRole="MemberMaster" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="TFaxModel.FK_MemberMasters_Countries" FromRole="MemberMaster" ToRole="Country" />
+          <NavigationProperty Name="MemberRole" Relationship="TFaxModel.FK_MemberMasters_MemberRoles" FromRole="MemberMaster" ToRole="MemberRole" />
+          <NavigationProperty Name="State" Relationship="TFaxModel.FK_MemberMasters_States" FromRole="MemberMaster" ToRole="State" />
+          <NavigationProperty Name="Status_Members" Relationship="TFaxModel.FK_MemberMasters_Status_Members" FromRole="MemberMaster" ToRole="Status_Members" />
+          <NavigationProperty Name="MyFavorites" Relationship="TFaxModel.FK_MyFavorites_MemberMasters2" FromRole="MemberMaster" ToRole="MyFavorite" />
+          <NavigationProperty Name="MyMessages" Relationship="TFaxModel.FK_MyMessages_MemberMasters" FromRole="MemberMaster" ToRole="MyMessage" />
+          <NavigationProperty Name="MyMessages1" Relationship="TFaxModel.FK_MyMessages_MemberMasters1" FromRole="MemberMaster" ToRole="MyMessage" />
+          <NavigationProperty Name="MyMessages2" Relationship="TFaxModel.FK_MyMessages_MemberMasters2" FromRole="MemberMaster" ToRole="MyMessage" />
+          <NavigationProperty Name="Profile_EduBackground" Relationship="TFaxModel.FK_Profile_EduBackground_MemberMasters" FromRole="MemberMaster" ToRole="Profile_EduBackground" />
+          <NavigationProperty Name="Profile_Master" Relationship="TFaxModel.FK_Profile_Master_MemberMasters" FromRole="MemberMaster" ToRole="Profile_Master" />
+          <NavigationProperty Name="Reviews" Relationship="TFaxModel.FK_Reviews_MemberMasters" FromRole="MemberMaster" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="MemberRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberMasters" Relationship="TFaxModel.FK_MemberMasters_MemberRoles" FromRole="MemberRole" ToRole="MemberMaster" />
+        </EntityType>
+        <EntityType Name="MyFavorite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="Int64" />
+          <Property Name="ProfileID" Type="Int64" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberMaster" Relationship="TFaxModel.FK_MyFavorites_MemberMasters2" FromRole="MyFavorite" ToRole="MemberMaster" />
+          <NavigationProperty Name="Profile_Master" Relationship="TFaxModel.FK_MyFavorites_Profile_Master" FromRole="MyFavorite" ToRole="Profile_Master" />
+        </EntityType>
+        <EntityType Name="MyMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToId" Type="Int64" />
+          <Property Name="CcId" Type="Int64" />
+          <Property Name="SenderId" Type="Int64" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateSent" Type="DateTime" Precision="3" />
+          <Property Name="DateRead" Type="DateTime" Precision="3" />
+          <Property Name="DateDelete" Type="DateTime" Precision="3" />
+          <Property Name="StatusReadId" Type="Int64" />
+          <Property Name="StatusDeleteId" Type="Int64" />
+          <Property Name="StatusLabelId" Type="Int64" />
+          <NavigationProperty Name="MemberMaster" Relationship="TFaxModel.FK_MyMessages_MemberMasters" FromRole="MyMessage" ToRole="MemberMaster" />
+          <NavigationProperty Name="MemberMaster1" Relationship="TFaxModel.FK_MyMessages_MemberMasters1" FromRole="MyMessage" ToRole="MemberMaster" />
+          <NavigationProperty Name="MemberMaster2" Relationship="TFaxModel.FK_MyMessages_MemberMasters2" FromRole="MyMessage" ToRole="MemberMaster" />
+          <NavigationProperty Name="Status_Messages" Relationship="TFaxModel.FK_MyMessages_Status_Messages" FromRole="MyMessage" ToRole="Status_Messages" />
+          <NavigationProperty Name="Status_Messages1" Relationship="TFaxModel.FK_MyMessages_Status_Messages1" FromRole="MyMessage" ToRole="Status_Messages" />
+          <NavigationProperty Name="Status_Messages2" Relationship="TFaxModel.FK_MyMessages_Status_Messages2" FromRole="MyMessage" ToRole="Status_Messages" />
+        </EntityType>
+        <EntityType Name="Profile_EduBackground">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int64" />
+          <Property Name="College_University" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GraduateYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Major" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Proof_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Proof_File" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Status_EduBackgroundId" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberMaster" Relationship="TFaxModel.FK_Profile_EduBackground_MemberMasters" FromRole="Profile_EduBackground" ToRole="MemberMaster" />
+          <NavigationProperty Name="Status_EduBackground" Relationship="TFaxModel.FK_Profile_EduBackground_Status_EduBackground" FromRole="Profile_EduBackground" ToRole="Status_EduBackground" />
+        </EntityType>
+        <EntityType Name="Profile_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileId" Type="Int64" />
+          <Property Name="LinkTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_LinkId" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile_Master" Relationship="TFaxModel.FK_Profile_Links_Profile_Master" FromRole="Profile_Links" ToRole="Profile_Master" />
+          <NavigationProperty Name="Status_Links" Relationship="TFaxModel.FK_Profile_Links_Status_Links" FromRole="Profile_Links" ToRole="Status_Links" />
+        </EntityType>
+        <EntityType Name="Profile_Master">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int64" />
+          <Property Name="OnlineTutoring" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OnsiteTutoring" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Travel" Type="Int32" />
+          <Property Name="TravelUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TutoringExperience" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TutoringGrade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HourlyFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CurrencyUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancellationPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OverallRating" Type="Double" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberMaster" Relationship="TFaxModel.FK_Profile_Master_MemberMasters" FromRole="Profile_Master" ToRole="MemberMaster" />
+          <NavigationProperty Name="MyFavorites" Relationship="TFaxModel.FK_MyFavorites_Profile_Master" FromRole="Profile_Master" ToRole="MyFavorite" />
+          <NavigationProperty Name="Profile_Links" Relationship="TFaxModel.FK_Profile_Links_Profile_Master" FromRole="Profile_Master" ToRole="Profile_Links" />
+          <NavigationProperty Name="Profile_Subjects" Relationship="TFaxModel.FK_Profile_Subjects_Profile_Master" FromRole="Profile_Master" ToRole="Profile_Subjects" />
+          <NavigationProperty Name="Reviews" Relationship="TFaxModel.FK_Reviews_Profile_Master" FromRole="Profile_Master" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="Profile_Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileId" Type="Int64" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Representative" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_SubjectId" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile_Master" Relationship="TFaxModel.FK_Profile_Subjects_Profile_Master" FromRole="Profile_Subjects" ToRole="Profile_Master" />
+          <NavigationProperty Name="Status_Subjects" Relationship="TFaxModel.FK_Profile_Subjects_Status_Subjects" FromRole="Profile_Subjects" ToRole="Status_Subjects" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfileId" Type="Int64" />
+          <Property Name="ReviewerId" Type="Int64" />
+          <Property Name="ReviewDate" Type="DateTime" Precision="3" />
+          <Property Name="ReviewTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subject_Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewSummary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_SubjectKnowledge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Helpfullness" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Passion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Score_SubjectKnowledge" Type="Int32" />
+          <Property Name="Score_Helpfullness" Type="Int32" />
+          <Property Name="Score_Passion" Type="Int32" />
+          <Property Name="Score_Overall" Type="Int32" />
+          <Property Name="Status_Screen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Show" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status_ReviewId" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Communication" Type="Int32" />
+          <NavigationProperty Name="MemberMaster" Relationship="TFaxModel.FK_Reviews_MemberMasters" FromRole="Review" ToRole="MemberMaster" />
+          <NavigationProperty Name="Profile_Master" Relationship="TFaxModel.FK_Reviews_Profile_Master" FromRole="Review" ToRole="Profile_Master" />
+          <NavigationProperty Name="Status_Reviews" Relationship="TFaxModel.FK_Reviews_Status_Reviews" FromRole="Review" ToRole="Status_Reviews" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int64" />
+          <NavigationProperty Name="Cities" Relationship="TFaxModel.FK_Cities_States" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="TFaxModel.FK_States_Countries" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="MemberMasters" Relationship="TFaxModel.FK_MemberMasters_States" FromRole="State" ToRole="MemberMaster" />
+        </EntityType>
+        <EntityType Name="Status_EduBackground">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile_EduBackground" Relationship="TFaxModel.FK_Profile_EduBackground_Status_EduBackground" FromRole="Status_EduBackground" ToRole="Profile_EduBackground" />
+        </EntityType>
+        <EntityType Name="Status_Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile_Links" Relationship="TFaxModel.FK_Profile_Links_Status_Links" FromRole="Status_Links" ToRole="Profile_Links" />
+        </EntityType>
+        <EntityType Name="Status_Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MemberMasters" Relationship="TFaxModel.FK_MemberMasters_Status_Members" FromRole="Status_Members" ToRole="MemberMaster" />
+        </EntityType>
+        <EntityType Name="Status_Messages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MyMessages" Relationship="TFaxModel.FK_MyMessages_Status_Messages" FromRole="Status_Messages" ToRole="MyMessage" />
+          <NavigationProperty Name="MyMessages1" Relationship="TFaxModel.FK_MyMessages_Status_Messages1" FromRole="Status_Messages" ToRole="MyMessage" />
+          <NavigationProperty Name="MyMessages2" Relationship="TFaxModel.FK_MyMessages_Status_Messages2" FromRole="Status_Messages" ToRole="MyMessage" />
+        </EntityType>
+        <EntityType Name="Status_Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reviews" Relationship="TFaxModel.FK_Reviews_Status_Reviews" FromRole="Status_Reviews" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="Status_Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile_Subjects" Relationship="TFaxModel.FK_Profile_Subjects_Status_Subjects" FromRole="Status_Subjects" ToRole="Profile_Subjects" />
+        </EntityType>
+        <EntityType Name="Status_TextContents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TextContents" Relationship="TFaxModel.FK_TextContents_TextContents" FromRole="Status_TextContents" ToRole="TextContent" />
+        </EntityType>
+        <EntityType Name="TextContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageId" Type="Int64" />
+          <Property Name="TitleHTML" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BodyHTML" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Language" Relationship="TFaxModel.FK_TextContents_Languages" FromRole="TextContent" ToRole="Language" />
+          <NavigationProperty Name="Status_TextContents" Relationship="TFaxModel.FK_TextContents_TextContents" FromRole="TextContent" ToRole="Status_TextContents" />
+        </EntityType>
+        <Association Name="FK_Cities_Countries">
+          <End Type="TFaxModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="TFaxModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_States">
+          <End Type="TFaxModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="TFaxModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Cities">
+          <End Type="TFaxModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMaster">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Countries">
+          <End Type="TFaxModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMaster">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_States_Countries">
+          <End Type="TFaxModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="TFaxModel.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextContents_Languages">
+          <End Type="TFaxModel.Language" Role="Language" Multiplicity="0..1" />
+          <End Type="TFaxModel.TextContent" Role="TextContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextContent">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_MemberRoles">
+          <End Type="TFaxModel.MemberRole" Role="MemberRole" Multiplicity="0..1" />
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMaster">
+              <PropertyRef Name="MemberRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_States">
+          <End Type="TFaxModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMaster">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberMasters_Status_Members">
+          <End Type="TFaxModel.Status_Members" Role="Status_Members" Multiplicity="0..1" />
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MemberMaster">
+              <PropertyRef Name="Status_MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyFavorites_MemberMasters2">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyFavorite" Role="MyFavorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyFavorite">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters1">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="CcId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_MemberMasters2">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_EduBackground_MemberMasters">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_EduBackground" Role="Profile_EduBackground" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_EduBackground">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Master_MemberMasters">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_Master" Role="Profile_Master" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Master">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_MemberMasters">
+          <End Type="TFaxModel.MemberMaster" Role="MemberMaster" Multiplicity="0..1" />
+          <End Type="TFaxModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MemberMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ReviewerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyFavorites_Profile_Master">
+          <End Type="TFaxModel.Profile_Master" Role="Profile_Master" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyFavorite" Role="MyFavorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyFavorite">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages">
+          <End Type="TFaxModel.Status_Messages" Role="Status_Messages" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="StatusDeleteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages1">
+          <End Type="TFaxModel.Status_Messages" Role="Status_Messages" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="StatusLabelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MyMessages_Status_Messages2">
+          <End Type="TFaxModel.Status_Messages" Role="Status_Messages" Multiplicity="0..1" />
+          <End Type="TFaxModel.MyMessage" Role="MyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Messages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MyMessage">
+              <PropertyRef Name="StatusReadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_EduBackground_Status_EduBackground">
+          <End Type="TFaxModel.Status_EduBackground" Role="Status_EduBackground" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_EduBackground" Role="Profile_EduBackground" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_EduBackground">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_EduBackground">
+              <PropertyRef Name="Status_EduBackgroundId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Links_Profile_Master">
+          <End Type="TFaxModel.Profile_Master" Role="Profile_Master" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_Links" Role="Profile_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Links">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Links_Status_Links">
+          <End Type="TFaxModel.Status_Links" Role="Status_Links" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_Links" Role="Profile_Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Links">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Links">
+              <PropertyRef Name="Status_LinkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Subjects_Profile_Master">
+          <End Type="TFaxModel.Profile_Master" Role="Profile_Master" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_Subjects" Role="Profile_Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Subjects">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Profile_Master">
+          <End Type="TFaxModel.Profile_Master" Role="Profile_Master" Multiplicity="0..1" />
+          <End Type="TFaxModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile_Master">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Subjects_Status_Subjects">
+          <End Type="TFaxModel.Status_Subjects" Role="Status_Subjects" Multiplicity="0..1" />
+          <End Type="TFaxModel.Profile_Subjects" Role="Profile_Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profile_Subjects">
+              <PropertyRef Name="Status_SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Status_Reviews">
+          <End Type="TFaxModel.Status_Reviews" Role="Status_Reviews" Multiplicity="0..1" />
+          <End Type="TFaxModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Reviews">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="Status_ReviewId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TextContents_TextContents">
+          <End Type="TFaxModel.Status_TextContents" Role="Status_TextContents" Multiplicity="0..1" />
+          <End Type="TFaxModel.TextContent" Role="TextContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_TextContents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TextContent">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TFaxModelStoreContainer" CdmEntityContainer="TFaxEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="TFaxModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="TFaxModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="CodeISO3" ColumnName="CodeISO3" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HTTPTraceListeners">
+            <EntityTypeMapping TypeName="TFaxModel.HTTPTraceListener">
+              <MappingFragment StoreEntitySet="HTTPTraceListeners">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="UserHostName" ColumnName="UserHostName" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="UserHostAddress" ColumnName="UserHostAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TraceDate" ColumnName="TraceDate" />
+                <ScalarProperty Name="TraceMessage" ColumnName="TraceMessage" />
+                <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="TFaxModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_MemberActivity">
+            <EntityTypeMapping TypeName="TFaxModel.Log_MemberActivity">
+              <MappingFragment StoreEntitySet="Log_MemberActivity">
+                <ScalarProperty Name="LoggedTime" ColumnName="LoggedTime" />
+                <ScalarProperty Name="ReferredURL" ColumnName="ReferredURL" />
+                <ScalarProperty Name="VisitedRawURL" ColumnName="VisitedRawURL" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="VisitedIP" ColumnName="VisitedIP" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="MemberEmail" ColumnName="MemberEmail" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_MemberMaster">
+            <EntityTypeMapping TypeName="TFaxModel.Log_MemberMaster">
+              <MappingFragment StoreEntitySet="Log_MemberMaster">
+                <ScalarProperty Name="LoggedDate" ColumnName="LoggedDate" />
+                <ScalarProperty Name="ActivationCodeExpired" ColumnName="ActivationCodeExpired" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="RegisteredIP" ColumnName="RegisteredIP" />
+                <ScalarProperty Name="RegisteredDate" ColumnName="RegisteredDate" />
+                <ScalarProperty Name="MemberClass" ColumnName="MemberClass" />
+                <ScalarProperty Name="Status_Member" ColumnName="Status_Member" />
+                <ScalarProperty Name="Status_Email" ColumnName="Status_Email" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email_Login" ColumnName="Email_Login" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_MemberSession">
+            <EntityTypeMapping TypeName="TFaxModel.Log_MemberSession">
+              <MappingFragment StoreEntitySet="Log_MemberSession">
+                <ScalarProperty Name="VisitedCountry" ColumnName="VisitedCountry" />
+                <ScalarProperty Name="VisitedCity" ColumnName="VisitedCity" />
+                <ScalarProperty Name="VisitedURL" ColumnName="VisitedURL" />
+                <ScalarProperty Name="ReferredURL" ColumnName="ReferredURL" />
+                <ScalarProperty Name="SessionOut" ColumnName="SessionOut" />
+                <ScalarProperty Name="LogOut" ColumnName="LogOut" />
+                <ScalarProperty Name="LogIn" ColumnName="LogIn" />
+                <ScalarProperty Name="SessionIn" ColumnName="SessionIn" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="VisitedIP" ColumnName="VisitedIP" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberMasters">
+            <EntityTypeMapping TypeName="TFaxModel.MemberMaster">
+              <MappingFragment StoreEntitySet="MemberMasters">
+                <ScalarProperty Name="MemberRoleId" ColumnName="MemberRoleId" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="ActivationCodeExpired" ColumnName="ActivationCodeExpired" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="RegisteredIP" ColumnName="RegisteredIP" />
+                <ScalarProperty Name="RegisteredDate" ColumnName="RegisteredDate" />
+                <ScalarProperty Name="MemberClass" ColumnName="MemberClass" />
+                <ScalarProperty Name="Status_MemberId" ColumnName="Status_MemberId" />
+                <ScalarProperty Name="Status_Email" ColumnName="Status_Email" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Cover_File" ColumnName="Cover_File" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email_Login" ColumnName="Email_Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberRoles">
+            <EntityTypeMapping TypeName="TFaxModel.MemberRole">
+              <MappingFragment StoreEntitySet="MemberRoles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyFavorites">
+            <EntityTypeMapping TypeName="TFaxModel.MyFavorite">
+              <MappingFragment StoreEntitySet="MyFavorites">
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MyMessages">
+            <EntityTypeMapping TypeName="TFaxModel.MyMessage">
+              <MappingFragment StoreEntitySet="MyMessages">
+                <ScalarProperty Name="StatusLabelId" ColumnName="StatusLabelId" />
+                <ScalarProperty Name="StatusDeleteId" ColumnName="StatusDeleteId" />
+                <ScalarProperty Name="StatusReadId" ColumnName="StatusReadId" />
+                <ScalarProperty Name="DateDelete" ColumnName="DateDelete" />
+                <ScalarProperty Name="DateRead" ColumnName="DateRead" />
+                <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+                <ScalarProperty Name="BodyText" ColumnName="BodyText" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="CcId" ColumnName="CcId" />
+                <ScalarProperty Name="ToId" ColumnName="ToId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profile_EduBackground">
+            <EntityTypeMapping TypeName="TFaxModel.Profile_EduBackground">
+              <MappingFragment StoreEntitySet="Profile_EduBackground">
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status_EduBackgroundId" ColumnName="Status_EduBackgroundId" />
+                <ScalarProperty Name="Proof_File" ColumnName="Proof_File" />
+                <ScalarProperty Name="Proof_Title" ColumnName="Proof_Title" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="GraduateYear" ColumnName="GraduateYear" />
+                <ScalarProperty Name="College_University" ColumnName="College_University" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profile_Links">
+            <EntityTypeMapping TypeName="TFaxModel.Profile_Links">
+              <MappingFragment StoreEntitySet="Profile_Links">
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status_LinkId" ColumnName="Status_LinkId" />
+                <ScalarProperty Name="LinkURL" ColumnName="LinkURL" />
+                <ScalarProperty Name="LinkTitle" ColumnName="LinkTitle" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profile_Master">
+            <EntityTypeMapping TypeName="TFaxModel.Profile_Master">
+              <MappingFragment StoreEntitySet="Profile_Master">
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="OverallRating" ColumnName="OverallRating" />
+                <ScalarProperty Name="CancellationPolicy" ColumnName="CancellationPolicy" />
+                <ScalarProperty Name="CurrencyUnit" ColumnName="CurrencyUnit" />
+                <ScalarProperty Name="HourlyFee" ColumnName="HourlyFee" />
+                <ScalarProperty Name="TutoringGrade" ColumnName="TutoringGrade" />
+                <ScalarProperty Name="TutoringExperience" ColumnName="TutoringExperience" />
+                <ScalarProperty Name="TravelUnit" ColumnName="TravelUnit" />
+                <ScalarProperty Name="Travel" ColumnName="Travel" />
+                <ScalarProperty Name="OnsiteTutoring" ColumnName="OnsiteTutoring" />
+                <ScalarProperty Name="OnlineTutoring" ColumnName="OnlineTutoring" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profile_Subjects">
+            <EntityTypeMapping TypeName="TFaxModel.Profile_Subjects">
+              <MappingFragment StoreEntitySet="Profile_Subjects">
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status_SubjectId" ColumnName="Status_SubjectId" />
+                <ScalarProperty Name="Representative" ColumnName="Representative" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="TFaxModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Communication" ColumnName="Communication" />
+                <ScalarProperty Name="ModifiedIP" ColumnName="ModifiedIP" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status_ReviewId" ColumnName="Status_ReviewId" />
+                <ScalarProperty Name="Status_Show" ColumnName="Status_Show" />
+                <ScalarProperty Name="Status_Screen" ColumnName="Status_Screen" />
+                <ScalarProperty Name="Score_Overall" ColumnName="Score_Overall" />
+                <ScalarProperty Name="Score_Passion" ColumnName="Score_Passion" />
+                <ScalarProperty Name="Score_Helpfullness" ColumnName="Score_Helpfullness" />
+                <ScalarProperty Name="Score_SubjectKnowledge" ColumnName="Score_SubjectKnowledge" />
+                <ScalarProperty Name="Description_Passion" ColumnName="Description_Passion" />
+                <ScalarProperty Name="Description_Helpfullness" ColumnName="Description_Helpfullness" />
+                <ScalarProperty Name="Description_SubjectKnowledge" ColumnName="Description_SubjectKnowledge" />
+                <ScalarProperty Name="ReviewSummary" ColumnName="ReviewSummary" />
+                <ScalarProperty Name="SessionHours" ColumnName="SessionHours" />
+                <ScalarProperty Name="SessionDate" ColumnName="SessionDate" />
+                <ScalarProperty Name="SessionLocation" ColumnName="SessionLocation" />
+                <ScalarProperty Name="Subject_Detail" ColumnName="Subject_Detail" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ReviewTitle" ColumnName="ReviewTitle" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+                <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="TFaxModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_EduBackground">
+            <EntityTypeMapping TypeName="TFaxModel.Status_EduBackground">
+              <MappingFragment StoreEntitySet="Status_EduBackground">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Links">
+            <EntityTypeMapping TypeName="TFaxModel.Status_Links">
+              <MappingFragment StoreEntitySet="Status_Links">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Members">
+            <EntityTypeMapping TypeName="TFaxModel.Status_Members">
+              <MappingFragment StoreEntitySet="Status_Members">
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Messages">
+            <EntityTypeMapping TypeName="TFaxModel.Status_Messages">
+              <MappingFragment StoreEntitySet="Status_Messages">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Reviews">
+            <EntityTypeMapping TypeName="TFaxModel.Status_Reviews">
+              <MappingFragment StoreEntitySet="Status_Reviews">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Subjects">
+            <EntityTypeMapping TypeName="TFaxModel.Status_Subjects">
+              <MappingFragment StoreEntitySet="Status_Subjects">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_TextContents">
+            <EntityTypeMapping TypeName="TFaxModel.Status_TextContents">
+              <MappingFragment StoreEntitySet="Status_TextContents">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TextContents">
+            <EntityTypeMapping TypeName="TFaxModel.TextContent">
+              <MappingFragment StoreEntitySet="TextContents">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedIP" ColumnName="CreatedIP" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="BodyHTML" ColumnName="BodyHTML" />
+                <ScalarProperty Name="TitleHTML" ColumnName="TitleHTML" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="PageID" ColumnName="PageID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

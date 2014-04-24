@@ -1,0 +1,121 @@
+﻿@model IPagedList<MyMessage>
+@{
+    ViewBag.Title = "Messaging";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+<div class="form-inline">
+    <div class="form-group">
+        <label class="b">List per page &nbsp;</label>
+        <div class="grey-select">
+            <select id="select-per-page" class="btn btn-greytint form-control" data-url="@Url.Action("Index", new { page = 1 })">
+                <option value="25">25 person</option>
+                <option value="50">50 persons</option>
+                <option value="100">100 persons</option>
+                <option value="200">200 persons</option>
+                <option value="500">500 persons</option>
+            </select>
+        </div>
+
+    </div>
+</div>
+
+<br />
+
+<div class="form-inline">
+    <div class="form-group">
+        <label class="b">Filter per status &nbsp;</label>
+        @Html.DropDownList("Statuses", null, new { @class = "btn btn-greytint form-control", onchange = string.Format("javascript:window.location.href ='{0}?status='+$(this).val();", Url.Action("Index")) })
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Send")
+</p>
+
+<br />
+
+@if (TempData["DeleteStatus"] != null)
+{
+    <p class="alert alert-warning">
+        @TempData["DeleteStatus"]
+    </p>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Subject
+        </th>
+        <th>
+            To
+        </th>
+        <th>
+            CC
+        </th>
+        <th>
+            Send Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Subject, "Details", new { id = item.Id }, new { @class = "btn btn-link" })
+            </td>
+            <td>
+                @if (item.MemberMaster != null)
+                {
+                    @item.MemberMaster.GetFullName()
+                    <i class="@item.MemberMaster.GetColor()"></i>
+                }
+            </td>
+            <td>
+                @if (item.MemberMaster1 != null)
+                {
+                    @item.MemberMaster1.GetFullName()
+                    <i class="@item.MemberMaster1.GetColor()"></i>
+                }
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateSent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status_Messages2.Name)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        Display = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 5,
+        UlElementClasses = new[] { "group t-page pull-right" }
+    })
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("select#select-per-page").change(function () {
+                var value = $(this).val();
+                if ($.trim(value)) {
+                    window.location.href = $(this).data("url") + "&size=" + value;
+                }
+
+            });
+        });
+    </script>
+}

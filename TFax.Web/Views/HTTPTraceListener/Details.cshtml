@@ -1,0 +1,68 @@
+﻿@model HTTPTraceListener
+
+@{
+    ViewBag.Title = "Details"; 
+}
+  
+<fieldset>
+    <legend>HTTPTraceListener</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.RequestUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RequestUrl)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TraceMessage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TraceMessage)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.TraceDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TraceDate)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserHostAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserHostAddress)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserAgent)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserAgent)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserHostName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserHostName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CategoryName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

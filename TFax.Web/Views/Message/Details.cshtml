@@ -1,0 +1,54 @@
+﻿@model MyMessage
+
+@{
+    ViewBag.Title = Model.Subject;
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+<div class="form-horizontal form-grey spaced">
+
+    <p class="greystand">
+        Details
+    </p>
+
+
+    <div class="form-group">
+        <label class="col-4 control-label tar">To</label>
+        <div class="col-6">
+            @Model.MemberMaster.GetFullName()
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-4 control-label tar">Cc</label>
+        <div class="col-6">
+            @Model.MemberMaster1.GetFullName()
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-4 control-label tar">Sender</label>
+        <div class="col-6">
+            @Model.MemberMaster2.GetFullName()
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-4 control-label tar">Body</label>
+        <div class="col-6">
+            @Html.Raw(Model.BodyText)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-4 control-label tar">Sent Date</label>
+        <div class="col-6">
+            @Html.DisplayFor(model => model.DateSent)
+        </div>
+    </div>
+    
+</div> 
+
+<p>
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger", onclick = "javascript:return confirm('Delete?');" })
+</p>

@@ -1,0 +1,27 @@
+﻿@model AccountViewModel
+@{
+    ViewBag.Title = "My Account";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+
+
+<p><a href="#">View our nationwide list</a> of tutors who have signed up and would like to be reviewed</p>
+
+@Html.Partial("Partials/_Messages", Model.Messages)
+
+<div class="clearfix"></div>
+
+@Html.Partial("Partials/_Favorites", Model.Favorites)
+
+<div class="clearfix"></div>
+
+@Html.Partial("Partials/_Reviews", Model.Reviews)
+
+
+<div class="clearfix"></div>
+
+@Html.Partial("Partials/_Search")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

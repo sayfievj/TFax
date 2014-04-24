@@ -1,0 +1,58 @@
+﻿@model ReviewSearchViewModel
+
+<form class="search-tutor" role="form">
+    <div class="col-2 cop item-s">
+        <div class="cmm">
+            <label for="select-country">Country</label><br>
+            @Html.DropDownList("CountryId", null, "All Countries", new { @class = "selectbox2" })
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-2 cop item-s">
+        <div class="cmm">
+            <label for="select-state">State/Province</label><br>
+            @Html.DropDownList("StateId", null, "All States", new { @class = "selectbox2" })
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-2 cop item-s">
+        <div class="cmm">
+            <label for="select-city">City</label><br>
+            @Html.DropDownList("StateId", null, "All Cities", new { @class = "selectbox2" })
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-2 cop item-s">
+        <div class="cmm">
+            <label for="select-grade">Grade level</label><br>
+            <select class="selectbox2" name="select-grade" id="select-grade">
+                <option selected="selected" value="1">All grades</option>
+                <option value="2">A</option>
+                <option value="3">B</option>
+                <option value="5">C</option>
+                <option value="6">D</option>
+            </select>
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-2 cop item-s">
+        <div class="cmm">
+            <label for="select-subject">Subject</label><br>
+            <select class="selectbox2" name="select-subject" id="select-subject">
+                <option selected="selected" value="1">All Subjects</option>
+                <option value="2">Mathematics</option>
+                <option value="3">Biology</option>
+                <option value="5">English</option>
+                <option value="6">French</option>
+            </select>
+        </div>
+    </div> <!-- end item-s -->
+
+    <div class="col-2 cop">
+        <div class="cmm">
+            <label class="w" for="select-subject">.</label><br>
+            <div class="cop">
+                <button class="btn btn-blue" type="submit">Search</button>
+                <a class="btn btn-link" href="@Url.Action("Index")">View All</a>
+            </div>
+        </div>
+    </div> <!-- end item-s -->
+    <div class="clearfix"></div>
+
+</form>

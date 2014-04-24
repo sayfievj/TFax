@@ -1,0 +1,60 @@
+﻿
+<div class="group top1">
+
+    <div class="col-4">
+        <span><a href="#">@Html.GetActiveMembers()</a></span>
+        <span><a href="#">@Html.GetReviews()</a></span>
+    </div>
+
+    <div class="col-3 tar">
+        @Html.Action("LanguageBar")
+    </div>
+
+    <div class="col-5 tar">
+
+        @if (MembershipHelper.Current.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new
+            {
+                id = "logoutForm"
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <span style="border-right: 2px solid #ddd !important;">
+                    Welcome back,@MembershipHelper.Current.FullName
+                </span>
+                <span style="border-right: 2px solid #ddd !important;">
+                    @Html.ActionLink("My Account", "Index", "Account")
+                </span>
+                <span>
+                    <a href="javascript:$('#logoutForm').submit()">Sign out</a>
+                </span>
+            }
+        }
+        else
+        {
+            <span style="border-right: 2px solid #ddd !important;"><a href="@Url.Action("Register", "Account", new {area = ""})">Freee Sign up</a></span>
+            <span><a href="@Url.Action("Login", "Account", new {area = ""})">Login</a></span>
+        }
+    </div>
+</div>
+<div class="group top2">
+    <div class="col-6 apples tar">
+        <span>
+            <a href="#">
+                <i class="red"></i>Become a Verified Tutor
+            </a>
+        </span>
+        <span>
+            <a href="#">
+                <i class="green"></i>Become a Verified Reviewer
+            </a>
+        </span>
+    </div>
+    <div class="col-6 logo1">
+        <h1 class="site-title" data-url="@Url.Action("Index", "Home", new {area = ""})">
+            <img class="tf-logo-ie" alt="" src="~/Images/tf_logo.png">
+        </h1>
+    </div>
+</div>

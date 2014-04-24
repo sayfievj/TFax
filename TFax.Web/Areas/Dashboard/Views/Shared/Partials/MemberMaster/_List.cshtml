@@ -1,0 +1,74 @@
+﻿@model IPagedList<MemberMaster>
+
+<table class="table">
+    <tr>
+        <th>
+            Email/Login
+        </th>
+        <th>
+            Full Name
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Registered Date
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_Login)
+            </td>
+            <td>
+                @item.GetFullName()
+            </td>
+            <td>
+                @item.MemberRole.Name
+            </td>
+            <td>
+                @item.GetLocation()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegisteredDate)
+            </td>
+            <td>
+                @if (item.IsActivated == true)
+                {
+                    <span class="btn btn-info">Active</span>
+                }
+                else
+                {
+                    <span class="btn btn-danger">Deactivate</span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+        Display = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 5,
+    })
+</div>

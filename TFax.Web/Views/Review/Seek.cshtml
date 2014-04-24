@@ -1,0 +1,33 @@
+﻿@model ReviewSearchViewModel
+@{
+    ViewBag.Title = "Seeking Review";
+    Layout = "~/Views/Shared/_Review.cshtml";
+    ViewBag.VisableTitle = true;
+}
+@Html.Action("Top")
+
+<div class="clearfix"></div> 
+
+<h3 class="section-title">@ViewBag.Title</h3>
+
+@Html.Partial("Partials/_Filter")
+
+@Html.Partial("Partials/_Paging", Model.Objects)
+
+@Html.Partial("Partials/_List", Model.Objects)
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("select#select-per-page").val('@Model.Objects.PageSize');
+            $("select#select-per-page").change(function () {
+                var value = $(this).val();
+                if ($.trim(value)) {
+                    window.location.href = $(this).data("url") + "&size=" + value;
+                }
+
+            });
+        });
+    </script>
+}

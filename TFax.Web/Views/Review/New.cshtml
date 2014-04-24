@@ -1,0 +1,61 @@
+﻿@model ReviewSearchViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Review.cshtml";
+    ViewBag.VisableTitle = true;
+}
+
+@Html.Action("Top")
+
+<hr class="splitter-d">
+<h3 class="blue-t">Top Review Rewards Programs For Tutors:</h3>
+<p>
+    Tutors earn 100 points for every review tutors receive on Tutorfax.com<br>
+    Tutors can use these points to place their profiles in the Top Reviewd list above or at the top of the reviews list<br>
+    Check your tutor account for <a class="b" href="#">details</a> <i>(Students will continue to earn Premium memebership for each review)</i>
+</p>
+
+<hr class="splitter-d">
+<div class="tar btn-cta"><a href="#" class="btn btn-blue">View tutors wanting reviews</a></div>
+
+<ul class="v-list cta">
+    <li><a href="#">Help us grow our review database !</a></li>
+    <li><a href="#">Post all yur reviews and rack up Premium membership !</a></li>
+    <li><a href="#">Thank you for your support !</a></li>
+    <li class="col-lg-9"><a href="#">Some tutors are offering free discount incentives for reviews !</a></li>
+
+</ul>
+
+<div class="clearfix"></div>
+
+@section buttom
+{
+
+
+    <div class="group reviews-box">
+        <h3 class="section-title">New Reviews</h3>
+
+        @Html.Partial("Partials/_Filter")
+
+        @Html.Partial("Partials/_Paging", Model.Objects)
+
+        @Html.Partial("Partials/_List", Model.Objects)
+    </div>
+
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("select#select-per-page").val('@Model.Objects.PageSize');
+            $("select#select-per-page").change(function () {
+                var value = $(this).val();
+                if ($.trim(value)) {
+                    window.location.href = $(this).data("url") + "&size=" + value;
+                }
+
+            });
+        });
+    </script>
+}

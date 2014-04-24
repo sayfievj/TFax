@@ -1,0 +1,558 @@
+﻿@model ProfileViewModel
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Account.cshtml";
+    var profile = Model.Member.Profile_Master.FirstOrDefault();
+    var profName = "Member.Profile_Master[0]";
+}
+
+@if (TempData["ProfileStatus"] != null)
+{
+    <p class="text-success">@TempData["ProfileStatus"]</p>
+}
+
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { role = "form", @class = "form-horizontal form-grey spaced", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Member.Id)
+
+    @(profile != null
+    ? Html.Hidden(String.Format("{0}.Id", profName), profile.Id)
+    : Html.Hidden(String.Format("{0}.Id", profName), 0))
+
+    <!-- start big form -->
+    <p class="greystand">Membership info</p>
+    <div class="form-group">
+        <label class="col-4 control-label tar">User type</label>
+        <div class="col-2"><p class="form-control-static">Free Member</p></div>
+        <div class="col-6"><a class="btn btn-orange" href="#">Upgrade to Premium Membership</a></div>
+    </div>
+
+    <p class="greystand">
+        Account Info
+    </p>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.Email_Login, new { @class = "col-4 control-label tar" })
+        <div class="col-4">
+            <p class="form-control-static">
+                @Html.DisplayFor(model => model.Member.Email_Login)
+                @Html.HiddenFor(model => model.Member.Email_Login)
+            </p>
+        </div>
+        <div class="col-4">
+            <a class="btn btn-orange" href="#">Change</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.FirstName, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.TextBoxFor(model => model.Member.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.FirstName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.LastName, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.TextBoxFor(model => model.Member.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.LastName)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CoverFile, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            <input type="file" name="CoverFile" id="CoverFile" accept="image/png,image/jpeg,image/gif,image/tiff,image/jpg" class="btn btn-orange btn-addfile">
+
+            <br />
+            <a href="@Model.Member.Cover_File.ToBase64String()">
+                <img alt="Cover Image" src="@Model.Member.Cover_File.ToBase64ImageString(135,135)" />
+            </a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.Address, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.TextAreaFor(model => model.Member.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.Address)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.Street, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.TextBoxFor(model => model.Member.Street, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.Street)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.CityId, "CityId", new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DropDownList("Member.CityId", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.CityId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.StateId, "StateId", new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DropDownList("Member.StateId", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.StateId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.CountryId, "CountryId", new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.DropDownList("Member.CountryId", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.CountryId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Member.MemberClass, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.TextBoxFor(model => model.Member.MemberClass, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Member.MemberClass)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-4 control-label tar">Receive News Letters</label>
+        <div class="col-4">
+            <div class="radio-inline two">
+                <label class="radio-inline"><input type="radio" checked="" value="option1" id="subscribeYes" name="subscribe">Yes</label>
+            </div>
+            <div class="radio-inline two">
+                <label class="radio-inline"><input type="radio" value="option2" id="subscribeNo" name="subscribe">No</label>
+            </div>
+        </div>
+    </div>
+
+    <p class="greystand">Links</p>
+    <div class="group">
+
+        <div data-id="link-items">
+            @{
+    var linkIndex = 0;
+    foreach (var link in profile.Profile_Links)
+    { 
+        <div data-class="link-item">
+             
+            <p class="col-8">
+                <a title="@link.LinkTitle" href="@link.LinkURL">@link.LinkTitle</a>
+            </p>
+            <p class="col-2 pull-right">
+                <a href="javascript:;" data-index="@linkIndex" data-url="@Url.Action("DeleteLink", new {id = link.Id})" data-class="link-item-danger">
+                    <i class="fa fa-times fa-red"></i>
+                </a>
+            </p>
+        </div>
+
+        linkIndex++;
+    }
+            }
+        </div>
+        <div class="clearfix"></div>
+        <p class="b col-3"></p>
+        <p><a class="spaced btn btn-orange" href="javascript:;" data-id="append-link">Add Link</a></p>
+
+    </div>
+
+    if (Model.IsTutor)
+    {
+        <p class="greystand">Diplomas and Certificates</p>
+        <div class="row spaced diploma-container">
+            <div data-id="edu-items">
+                @{
+        var eduIndex = 0;
+        foreach (var edu in Model.Member.Profile_EduBackground)
+        { 
+            <div class="col-4 outim item-diploma" data-class="edu-item">
+                 
+                <table class="table-responsive">
+                    <tr>
+                        <th>@Html.LabelFor(model => edu.College_University, new { @class = "col-4 control-label tar" })</th>
+                        <td>@Html.DisplayFor(model => edu.College_University)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(model => edu.GraduateYear, new { @class = "col-4 control-label tar" })</th>
+                        <td>@Html.DisplayFor(model => edu.GraduateYear)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(model => edu.Major, new { @class = "col-4 control-label tar" })</th>
+                        <td>@Html.DisplayFor(model => edu.Major)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.LabelFor(model => edu.Degree, new { @class = "col-4 control-label tar" })</th>
+                        <td>@Html.DisplayFor(model => edu.Degree)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <a href="@edu.Proof_File.ToBase64String()">
+                                <img alt="@edu.Proof_Title" title="@edu.Proof_Title" src="@edu.Proof_File.ToBase64ImageString(135, 135)" />
+                            </a>
+                            <strong class="label-space">@edu.Proof_Title</strong>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn-group btn-group-justified">
+                    <a href="javascript:;" data-index="@eduIndex" data-url="@Url.Action("DeleteEduBackground", new {id = edu.Id})" data-class="edu-item-danger">
+                        <i class="fa fa-times fa-red">Delete</i>
+                    </a>
+                </div>
+            </div>
+                    <div class="clearfix"></div>
+
+            eduIndex++;
+        }
+                }
+            </div>
+            <div class="clearfix"></div>
+            <p class="b col-3"></p>
+            <p><a class="spaced btn btn-orange" href="javascript:;" data-id="append-edu">Add File</a></p>
+
+        </div>
+
+
+        <p class="greystand">Subjects</p>
+        <div class="group">
+
+            <div data-id="subject-items">
+                @{
+        var subjectIndex = 0;
+        foreach (var subject in profile.Profile_Subjects)
+        { 
+            <div data-class="subject-item"> 
+                <p class="col-4">
+                    Subject: @subject.Subject
+                </p>
+                <p class="col-4">
+                    Representative: @subject.Representative
+                </p>
+                <p class="col-2 pull-right">
+                    <a href="javascript:;" data-index="@subjectIndex" data-url="@Url.Action("DeleteSubject", new {id = subject.Id})" data-class="subject-item-danger">
+                        <i class="fa fa-times fa-red"></i>
+                    </a>
+                </p>
+            </div>
+
+            subjectIndex++;
+        }
+                }
+            </div>
+            <div class="clearfix"></div>
+            <p class="b col-3"></p>
+            <p><a class="spaced btn btn-orange" href="javascript:;" data-id="append-subject">Add Subject</a></p>
+
+        </div>
+    }
+
+    <p class="greystand">Password <i>(Change your password below)</i></p>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ChangePassword.OldPassword, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.PasswordFor(model => model.ChangePassword.OldPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChangePassword.OldPassword)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ChangePassword.NewPassword, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.PasswordFor(model => model.ChangePassword.NewPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChangePassword.NewPassword)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ChangePassword.ConfirmPassword, new { @class = "col-4 control-label tar" })
+        <div class="col-6">
+            @Html.PasswordFor(model => model.ChangePassword.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ChangePassword.ConfirmPassword)
+        </div>
+    </div>
+
+
+
+    <div class="tac">
+        <button class="btn btn-blue btn-wide" type="submit">Save all</button>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/jquery.tmpl.js")"></script>
+
+    <script type="text/html" id="linkTemplate">
+        @{
+            var linkName = String.Format("{0}.Profile_Links[${{index}}]", profName);
+        }
+        <div data-class="link-item">
+
+            <input type="hidden" value="@Model.Member.Id" name="@string.Format("{0}.ProfileId", linkName)" />
+            <input type="hidden" value="0" name="@string.Format("{0}.Id", linkName)" />
+
+            <p class="pull-right">
+                <a href="javascript:;" data-index="${index}" data-class="link-item-danger">
+                    <i class="fa fa-times fa-red">Delete</i>
+                </a>
+            </p>
+
+            <div class="form-group">
+                <label class="col-4 control-label tar" for="@string.Format("{0}.LinkTitle", linkName)">
+                    Title
+                </label>
+                <div class="col-6">
+                    <input type="text" class="form-control" name="@string.Format("{0}.LinkTitle", linkName)" id="@string.Format("{0}.LinkTitle", linkName)" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-4 control-label tar" for="@string.Format("{0}.LinkURL", linkName)">
+                    URL
+                </label>
+                <div class="col-6">
+                    <input type="text" class="form-control" name="@string.Format("{0}.LinkURL", linkName)" id="@string.Format("{0}.LinkURL", linkName)" />
+                </div>
+            </div>
+
+            <hr class="splitter-d" />
+        </div>
+
+    </script>
+
+    @if (Model.IsTutor)
+    {
+
+        <script type="text/html" id="eduTemplate">
+            @{
+        var eduName = String.Format("Member.Profile_EduBackground[${{index}}]");
+            }
+            <div data-class="edu-item">
+
+                <input type="hidden" value="@Model.Member.Id" name="@string.Format("{0}.MemberId", eduName)" />
+                <input type="hidden" value="0" name="@string.Format("{0}.Id", eduName)" />
+
+                <p class="pull-right">
+                    <a href="javascript:;" data-index="${index}" data-class="edu-item-danger">
+                        <i class="fa fa-times fa-red">Delete</i>
+                    </a>
+                </p>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.College_University", eduName)">
+                        College University
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.College_University", eduName)" id="@string.Format("{0}.College_University", eduName)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.GraduateYear", eduName)">
+                        Graduate Year
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.GraduateYear", eduName)" id="@string.Format("{0}.GraduateYear", eduName) " />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Major", eduName)">
+                        Major
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.Major", eduName)" id="@string.Format("{0}.Major", eduName) " />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Degree", eduName)">
+                        Degree
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.Degree", eduName)" id="@string.Format("{0}.Degree", eduName) " />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Proof_Title", eduName)">
+                        Proof Title
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.Proof_Title", eduName)" id="@string.Format("{0}.Proof_Title", eduName) " />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Proof_File", eduName)">
+                        Proof File
+                    </label>
+                    <div class="col-6">
+                        <input type="file" accept="image/png,image/jpeg,image/gif,image/tiff,image/jpg" id="@string.Format("{0}.Proof_File", eduName)" name="eduFiles[${index}]" class="btn btn-orange btn-addfile" />
+                    </div>
+                </div>
+                <hr class="splitter-d" />
+            </div>
+
+        </script>
+
+        <script type="text/html" id="subjectTemplate">
+            @{
+        var subjectName = String.Format("{0}.Profile_Subjects[${{index}}]", profName);
+            }
+            <div data-class="subject-item">
+                <input type="hidden" value="@Model.Member.Id" name="@string.Format("{0}.ProfileId", subjectName)" />
+                <input type="hidden" value="0" name="@string.Format("{0}.Id", subjectName)" />
+
+                <p class="pull-right">
+                    <a href="javascript:;" data-index="${index}" data-class="subject-item-danger">
+                        <i class="fa fa-times fa-red">Delete</i>
+                    </a>
+                </p>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Subject", subjectName)">
+                        Subject
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.Subject", subjectName) id=" @string.Format("{0}.Subject", subjectName) />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-4 control-label tar" for="@string.Format("{0}.Representative", subjectName)">
+                        Representative
+                    </label>
+                    <div class="col-6">
+                        <input type="text" class="form-control" name="@string.Format("{0}.Representative", subjectName)" id="@string.Format("{0}.Representative", subjectName)" />
+                    </div>
+                </div>
+
+                <hr class="splitter-d" />
+            </div>
+
+        </script>
+
+    }
+
+    <script type="text/javascript">
+        $(function () {
+
+            //link
+            $("a[data-id='append-link']").click(function () {
+
+                var count = $("div[data-id='link-items']").find("div[data-class='link-item']").size();
+                var model = [{ index: count }];
+
+                $("#linkTemplate").tmpl(model).appendTo("div[data-id='link-items']");
+
+                return false;
+            });
+            $('body').on("click", "a[data-class='link-item-danger']", function () {
+
+                if (confirm("Delete?")) {
+
+                    var index = $(this).data("index");
+                    var url = $(this).data("url");
+
+                    if ($.trim(url)) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: url,
+                            complete: function () {
+                            }
+                        });
+                    }
+
+                    $("div[data-id='link-items']").find("div[data-class='link-item']").eq(index).remove();
+                }
+
+                return false;
+            });
+
+            @if (Model.IsTutor)
+            {
+                <text>
+
+            //edu
+            $("a[data-id='append-edu']").click(function () {
+
+                var count = $("div[data-id='edu-items']").find("div[data-class='edu-item']").size();
+                var model = [{ index: count }];
+
+                $("#eduTemplate").tmpl(model).appendTo("div[data-id='edu-items']");
+
+                return false;
+            });
+            $('body').on("click", "a[data-class='edu-item-danger']", function () {
+
+                if (confirm("Delete?")) {
+
+                    var index = $(this).data("index");
+                    var url = $(this).data("url");
+
+                    if ($.trim(url)) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: url,
+                            complete: function () {
+                            }
+                        });
+                    }
+
+                    $("div[data-id='edu-items']").find("div[data-class='edu-item']").eq(index).remove();
+
+                }
+
+                return false;
+            });
+
+            //subject
+            $("a[data-id='append-subject']").click(function () {
+
+                var count = $("div[data-id='subject-items']").find("div[data-class='subject-item']").size();
+                var model = [{ index: count }];
+
+                $("#subjectTemplate").tmpl(model).appendTo("div[data-id='subject-items']");
+
+                return false;
+            });
+            $('body').on("click", "a[data-class='subject-item-danger']", function () {
+
+                if (confirm("Delete?")) {
+
+                    var index = $(this).data("index");
+                    var url = $(this).data("url");
+
+                    if ($.trim(url)) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: url,
+                            complete: function () {
+                            }
+                        });
+                    }
+
+                    $("div[data-id='subject-items']").find("div[data-class='subject-item']").eq(index).remove();
+
+                }
+
+                return false;
+            });
+
+            </text>
+            }
+        });
+    </script>
+}

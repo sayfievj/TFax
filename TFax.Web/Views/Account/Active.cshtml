@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Activate";
+}
+
+@if (TempData["ActiveStatus"] != null)
+{
+    <h4 class="alert alert-success">
+        You member status changed to activatation.
+    </h4>
+}
+else
+{
+    <h4 class="alert alert-danger">
+        Your acount is activate.
+    </h4>
+}
+
+<p class="alert alert-info">
+    Please try @Html.ActionLink("login", "Login", "Account") with your account.
+</p>

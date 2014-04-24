@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3DF43CBA-C2F6-42E4-8EB9-16E81B8340A3}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TFax.Web</RootNamespace>
+    <AssemblyName>TFax.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapperAssist">
+      <HintPath>..\packages\AutoMapperAssist.2.0\lib\AutoMapperAssist.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper">
+      <HintPath>..\packages\Bootstrapper.2.0.3.9\lib\Net40\Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc4">
+      <HintPath>..\packages\Unity.Mvc4.1.2.0.0\lib\net40\Unity.Mvc4.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.30506.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.30506.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SMTPConfig.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CityController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CountryController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\FAQController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\MemberMasterController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\StateController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\TextContentController.cs" />
+    <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="App_Start\IOCConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
+    <Compile Include="Controllers\FavoriteController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HTTPTraceListenerController.cs" />
+    <Compile Include="Controllers\MemberMasterController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="CORE\AppSettings.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\BaseEntity.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\BaseRepository.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\BusinessTransaction.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\IBaseRepository.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="CORE\BLL\Infrastructure\UnitOfWork.cs" />
+    <Compile Include="CORE\BLL\Security\IMembershipHelper.cs" />
+    <Compile Include="CORE\BLL\Security\MembershipHelper.cs" />
+    <Compile Include="CORE\BLL\Security\MembershipStore.cs" />
+    <Compile Include="CORE\COMMON\Attributes\AppAuthorizeAttribute.cs" />
+    <Compile Include="CORE\COMMON\Attributes\HttpTraceFilterAttribute.cs" />
+    <Compile Include="CORE\COMMON\Controllers\AppController.cs" />
+    <Compile Include="CORE\COMMON\Controllers\DbController.cs" />
+    <Compile Include="CORE\COMMON\Enums\ContentPage.cs" />
+    <Compile Include="CORE\COMMON\Enums\ContentStatus.cs" />
+    <Compile Include="CORE\COMMON\Enums\Culture.cs" />
+    <Compile Include="CORE\COMMON\Enums\MemberStatus.cs" />
+    <Compile Include="CORE\COMMON\Enums\MessageStatus.cs" />
+    <Compile Include="CORE\COMMON\Enums\ReviewStatus.cs" />
+    <Compile Include="CORE\COMMON\Enums\Role.cs" />
+    <Compile Include="CORE\COMMON\Extensions\ConvertTypeExtension.cs" />
+    <Compile Include="CORE\COMMON\Extensions\DBExtension.cs" />
+    <Compile Include="CORE\COMMON\Extensions\ModelExtension.cs" />
+    <Compile Include="CORE\COMMON\Extensions\RouteExtension.cs" />
+    <Compile Include="CORE\COMMON\Helpers\AppSettingsHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\CacheHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\CultureHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\EmailHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\SessionHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\UIHelper.cs" />
+    <Compile Include="CORE\COMMON\Helpers\UtilHelper.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\AccountViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\MemberViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\ProfileViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\ReviewSearchViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\ReviewViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\LoginViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="CORE\COMMON\ViewModels\SearchTutorViewModel.cs" />
+    <Compile Include="CORE\DAL\City.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Country.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\HTTPTraceListener.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Language.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Log_MemberActivity.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Log_MemberMaster.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Log_MemberSession.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\MemberMaster.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\MemberRole.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\MyFavorite.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\MyMessage.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Profile_EduBackground.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Profile_Links.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Profile_Master.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Profile_Subjects.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Review.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\State.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_EduBackground.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_Links.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_Members.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_Messages.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_Reviews.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_Subjects.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\Status_TextContents.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\TextContent.cs">
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\TFaxModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFaxModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\TFaxModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFaxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CORE\DAL\TFaxModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFaxModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\custom.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\ie-only.css" />
+    <Content Include="Content\ie9-only.css" />
+    <Content Include="Content\jquery.selectBox.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\bootstrap-pagination.css" />
+    <Content Include="Content\ui.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Areas\Dashboard\Views\City\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\City\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\City\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\City\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\City\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Country\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Country\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Country\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Country\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Country\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\MemberMaster\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\MemberMaster\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\MemberMaster\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\MemberMaster\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\MemberMaster\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\City\_Form.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\City\_List.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\City\_View.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\Country\_Form.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\Country\_List.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\Country\_View.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\MemberMaster\_Form.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\MemberMaster\_List.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\MemberMaster\_View.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\State\_Form.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\State\_List.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\State\_View.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\TextContent\_Form.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\TextContent\_List.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\TextContent\_View.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\_LoginPartial.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Dashboard\Views\State\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\State\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\State\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\State\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\State\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TextContent\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TextContent\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TextContent\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TextContent\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\TextContent\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Web.config" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <EntityDeploy Include="CORE\DAL\TFaxModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TFaxModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="CORE\DAL\TFaxModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TFaxModel.edmx</DependentUpon>
+      <LastGenOutput>TFaxModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CORE\DAL\TFaxModel.edmx.diagram">
+      <DependentUpon>TFaxModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CORE\DAL\TFaxModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TFaxModel.edmx</DependentUpon>
+      <LastGenOutput>TFaxModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Images\apples.png" />
+    <Content Include="Images\apples_2.png" />
+    <Content Include="Images\border-after-orange.png" />
+    <Content Include="Images\border-after.png" />
+    <Content Include="Images\border-before-orange.png" />
+    <Content Include="Images\border-before.png" />
+    <Content Include="Images\diploma_1.png" />
+    <Content Include="Images\dropdown-arrow.png" />
+    <Content Include="Images\no_image.png" />
+    <Content Include="Images\select-arrow.png" />
+    <Content Include="Images\slide_1.jpg" />
+    <Content Include="Images\slide_2.jpg" />
+    <Content Include="Images\teacher_1.jpg" />
+    <Content Include="Images\teacher_2.jpg" />
+    <Content Include="Images\teacher_3.jpg" />
+    <Content Include="Images\teacher_4.jpg" />
+    <Content Include="Images\teacher_5.jpg" />
+    <Content Include="Images\teacher_6.jpg" />
+    <Content Include="Images\tf_logo.png" />
+    <Content Include="Images\tf_logo3.png" />
+    <Content Include="Scripts\bjqs.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\cleditor\images\buttons.gif" />
+    <Content Include="Scripts\cleditor\images\toolbar.gif" />
+    <Content Include="Scripts\cleditor\jquery.cleditor.css" />
+    <Content Include="Scripts\cleditor\jquery.cleditor.js" />
+    <Content Include="Scripts\cleditor\jquery.cleditor.min.js" />
+    <Content Include="Scripts\cleditor\jquery.cleditor.xhtml.js" />
+    <Content Include="Scripts\cleditor\jquery.cleditor.xhtml.min.js" />
+    <Content Include="Scripts\easyListSplitter.js" />
+    <Content Include="Scripts\fancyBox\blank.gif" />
+    <Content Include="Scripts\fancyBox\fancybox_loading%402x.gif" />
+    <Content Include="Scripts\fancyBox\fancybox_loading.gif" />
+    <Content Include="Scripts\fancyBox\fancybox_overlay.png" />
+    <Content Include="Scripts\fancyBox\fancybox_sprite%402x.png" />
+    <Content Include="Scripts\fancyBox\fancybox_sprite.png" />
+    <Content Include="Scripts\fancyBox\helpers\fancybox_buttons.png" />
+    <Content Include="Scripts\fancyBox\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Scripts\fancyBox\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Scripts\fancyBox\helpers\jquery.fancybox-media.js" />
+    <Content Include="Scripts\fancyBox\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Scripts\fancyBox\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Scripts\fancyBox\jquery.fancybox.css" />
+    <Content Include="Scripts\fancyBox\jquery.fancybox.js" />
+    <Content Include="Scripts\fancyBox\jquery.fancybox.pack.js" />
+    <Content Include="Scripts\holder.js" />
+    <Content Include="Scripts\html5shiv.js" />
+    <Content Include="Areas\Dashboard\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Dashboard\Views\FAQ\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\FAQ\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\FAQ\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\FAQ\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\FAQ\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\Partials\_Language.cshtml" />
+    <None Include="Properties\PublishProfiles\TFax.pubxml" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.mousewheel.pack.js" />
+    <Content Include="Scripts\jquery.optionTree.js" />
+    <Content Include="Scripts\jquery.secret-source.js" />
+    <Content Include="Scripts\jquery.selectBox.js" />
+    <Content Include="Scripts\jquery.tmpl.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\knockout.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Views\Account\Active.cshtml" />
+    <Content Include="Views\Review\Account.cshtml" />
+    <Content Include="Views\Account\Partials\_Messages.cshtml" />
+    <Content Include="Views\Account\Partials\_Favorites.cshtml" />
+    <Content Include="Views\Account\Partials\_Reviews.cshtml" />
+    <Content Include="Views\Account\Partials\_Search.cshtml" />
+    <None Include="Views\Error\Status\401.cshtml" />
+    <None Include="Views\Error\Status\403.cshtml" />
+    <None Include="Views\Error\Status\404.cshtml" />
+    <None Include="Views\Error\Status\405.cshtml" />
+    <None Include="Views\Error\Status\406.cshtml" />
+    <None Include="Views\Error\Status\412.cshtml" />
+    <None Include="Views\Error\Status\500.cshtml" />
+    <None Include="Views\Error\Status\501.cshtml" />
+    <None Include="Views\Error\Status\502.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\MemberMaster\Become.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Review\New.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CLEditor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextContent.cshtml" />
+    <Content Include="Views\Shared\Partials\_Account.cshtml" />
+    <Content Include="Views\Shared\Partials\_Country.cshtml" />
+    <Content Include="Views\Shared\Partials\_Footer.cshtml" />
+    <Content Include="Views\Shared\Partials\_Header.cshtml" />
+    <Content Include="Views\Shared\Partials\_Menu.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\HTTPTraceListener\Index.cshtml" />
+    <Content Include="Views\HTTPTraceListener\Details.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Shared\_Account.cshtml" />
+    <Content Include="Views\Shared\Partials\_Language.cshtml" />
+    <Content Include="Views\Review\Contact.cshtml" />
+    <Content Include="Views\Review\Details.cshtml" />
+    <Content Include="Views\Payment\History.cshtml" />
+    <Content Include="Views\MemberMaster\Search.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Shared\_Review.cshtml" />
+    <Content Include="Views\Review\Partials\_TopReviews.cshtml" />
+    <Content Include="Views\Review\Submit.cshtml" />
+    <Content Include="Views\Review\Seek.cshtml" />
+    <Content Include="Views\Review\Partials\_Filter.cshtml" />
+    <Content Include="Views\Review\Partials\_List.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Message\Review.cshtml" />
+    <Content Include="Views\Message\Send.cshtml" />
+    <Content Include="Views\Review\Edit.cshtml" />
+    <Content Include="Views\Message\Details.cshtml" />
+    <Content Include="Views\Review\Partials\_Paging.cshtml" />
+    <Content Include="Views\Favorite\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6646</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:6646/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.2.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.0\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

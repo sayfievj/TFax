@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    ViewBag.VisableTitle = true;
+}
+
+<div class="banner2 bpush">
+    <div id="banner-fade" style="max-width: 810px; position: relative; height: 380px;">
+
+        <ul class="bjqs slider-home" style="width: 100%; display: block; height: 380px;">
+            <li class="bjqs-slide" style="width: 100%; display: list-item; height: 380px;">
+                <img title="title_1" src="@Url.Content("~/Images/slide_2.jpg")" style="width: 100%; height: 380px;">
+                <div class="bannertext leftie">Do you need a right Tutor?</div>
+                <p class="bjqs-caption">title_1</p>
+            </li>
+            <li class="bjqs-slide" style="width: 100%; height: 380px; display: none;">
+                <img title="title_1" src="@Url.Content("~/Images/slide_1.jpg")" style="width: 100%; height: 380px;">
+                <div class="bannertext rightie">Do you need a right Tutor?</div>
+                <p class="bjqs-caption">title_1</p>
+            </li>
+        </ul>
+
+        <ul class="bjqs-controls v-centered"><li class="bjqs-prev"><a data-direction="previous" href="#" style="top: 50%;">Prev</a></li><li class="bjqs-next"><a data-direction="forward" href="#" style="top: 50%;">Next</a></li></ul><ol class="bjqs-markers h-centered" style="left: 0px;"><li class="active-marker"><a href="#">1</a></li><li class=""><a href="#">2</a></li></ol>
+    </div>
+</div>
+<div class="content">
+
+    @Html.GetPageContent(ContentPage.HOME_PAGE_CONTENT)
+    @Html.GetPageContent(ContentPage.TUTORING_MATCHING_SITES)
+    @Html.GetPageContent(ContentPage.TUTORING_SERVICES_COMPANIES)
+
+</div>
+
+@section buttom
+{
+    @Html.Action("Account")
+}
+
+@section scripts
+{
+    <script src="@Url.Content("~/Scripts/bjqs.js")"></script>
+    <script type="text/javascript">
+        $('#banner-fade').bjqs({
+            height: 380,
+            width: 810,
+            responsive: true,
+            animtype: 'fade',
+            animduration: 500,
+            animspeed: 6000,
+        });
+    </script>
+}

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MyMessage>
+
+
+<h3 class="s-title"><a href="#">My Messages</a>&nbsp;&nbsp;<a href="#" class="shrink">(@Model.Count() new messages)</a></h3>
+<hr class="splitter-d"/> 
+@foreach (var item in Model)
+{
+    <div class="s-details">
+        <ul>
+            <li class="col-2">@item.DateSent.GetValueOrDefault().ToShortDateString()</li>
+            <li class="col-3">@item.MemberMaster2.GetLocation() </li>
+            <li class="col-1"> New</li>
+            <li class="col-5">@item.Subject </li>
+            <li class="col-1"><span></span><a href="#">Reply</a></li>
+        </ul>
+        <div class="clearfix"></div>
+
+    </div>
+}

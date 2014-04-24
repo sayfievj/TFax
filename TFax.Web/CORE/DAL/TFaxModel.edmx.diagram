@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80734d440ab34e358a1835f32011fe22" Name="Diagram1">
+        <EntityTypeShape EntityType="TFaxModel.City" Width="1.5" PointX="5.25" PointY="17.5" />
+        <EntityTypeShape EntityType="TFaxModel.Country" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="TFaxModel.HTTPTraceListener" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TFaxModel.Language" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="TFaxModel.Log_MemberActivity" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="TFaxModel.Log_MemberMaster" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TFaxModel.Log_MemberSession" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TFaxModel.MemberMaster" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="TFaxModel.MemberRole" Width="1.5" PointX="5.25" PointY="14.5" />
+        <EntityTypeShape EntityType="TFaxModel.MyFavorite" Width="1.5" PointX="12" PointY="23.25" />
+        <EntityTypeShape EntityType="TFaxModel.MyMessage" Width="1.5" PointX="9.75" PointY="16.5" />
+        <EntityTypeShape EntityType="TFaxModel.Profile_EduBackground" Width="1.5" PointX="12.75" PointY="17" />
+        <EntityTypeShape EntityType="TFaxModel.Profile_Links" Width="1.5" PointX="15" PointY="30.375" />
+        <EntityTypeShape EntityType="TFaxModel.Profile_Master" Width="1.5" PointX="9.75" PointY="29.375" />
+        <EntityTypeShape EntityType="TFaxModel.Profile_Subjects" Width="1.5" PointX="12" PointY="30.375" />
+        <EntityTypeShape EntityType="TFaxModel.Review" Width="1.5" PointX="15" PointY="21.25" />
+        <EntityTypeShape EntityType="TFaxModel.State" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="TFaxModel.Status_EduBackground" Width="1.5" PointX="10.5" PointY="13.875" />
+        <EntityTypeShape EntityType="TFaxModel.Status_Links" Width="1.5" PointX="12.75" PointY="34.875" />
+        <EntityTypeShape EntityType="TFaxModel.Status_Members" Width="1.5" PointX="5.25" PointY="21.125" />
+        <EntityTypeShape EntityType="TFaxModel.Status_Messages" Width="1.5" PointX="7.5" PointY="11.625" />
+        <EntityTypeShape EntityType="TFaxModel.Status_Reviews" Width="1.5" PointX="12.75" PointY="27.75" />
+        <EntityTypeShape EntityType="TFaxModel.Status_Subjects" Width="1.5" PointX="9.75" PointY="26.875" />
+        <EntityTypeShape EntityType="TFaxModel.Status_TextContents" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="TFaxModel.TextContent" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="TFaxModel.FK_Cities_Countries" />
+        <AssociationConnector Association="TFaxModel.FK_Cities_States" />
+        <AssociationConnector Association="TFaxModel.FK_MemberMasters_Cities" />
+        <AssociationConnector Association="TFaxModel.FK_MemberMasters_Countries" />
+        <AssociationConnector Association="TFaxModel.FK_States_Countries" />
+        <AssociationConnector Association="TFaxModel.FK_TextContents_Languages" />
+        <AssociationConnector Association="TFaxModel.FK_MemberMasters_MemberRoles" />
+        <AssociationConnector Association="TFaxModel.FK_MemberMasters_States" />
+        <AssociationConnector Association="TFaxModel.FK_MemberMasters_Status_Members" />
+        <AssociationConnector Association="TFaxModel.FK_MyFavorites_MemberMasters2" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_MemberMasters" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_MemberMasters1" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_MemberMasters2" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_EduBackground_MemberMasters" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_Master_MemberMasters" />
+        <AssociationConnector Association="TFaxModel.FK_Reviews_MemberMasters" />
+        <AssociationConnector Association="TFaxModel.FK_MyFavorites_Profile_Master" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_Status_Messages" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_Status_Messages1" />
+        <AssociationConnector Association="TFaxModel.FK_MyMessages_Status_Messages2" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_EduBackground_Status_EduBackground" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_Links_Profile_Master" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_Links_Status_Links" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_Subjects_Profile_Master" />
+        <AssociationConnector Association="TFaxModel.FK_Reviews_Profile_Master" />
+        <AssociationConnector Association="TFaxModel.FK_Profile_Subjects_Status_Subjects" />
+        <AssociationConnector Association="TFaxModel.FK_Reviews_Status_Reviews" />
+        <AssociationConnector Association="TFaxModel.FK_TextContents_TextContents" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
