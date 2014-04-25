@@ -110,7 +110,7 @@ namespace TFax.Web.Controllers
             var model = Mapper.Map<ReviewViewModel>(review);
 
             ViewBag.Member = MembershipHelper.Current.GetMember();
-            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Id", "Subject");
+            ViewBag.Subject = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Subject", "Subject");
 
             return View(model);
         }

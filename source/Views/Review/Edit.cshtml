@@ -112,7 +112,7 @@
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="col-8"><label>Passion</label></div>
+                <div class="col-8"><label>Score Passion</label></div>
                 <div class="col-4 cop">
                     @Html.DropDownListFor(model => model.Score_Passion, Html.GetListItems(), new { @class = "selectbox2" })
                     @Html.ValidationMessageFor(model => model.Score_Passion)
@@ -127,10 +127,10 @@
 
                 </div>
 
-                <div class="col-8"><label for="tutor-overall">tutor-overall</label></div>
+                <div class="col-8"><label for="tutor-overall">Helpfullness</label></div>
                 <div class="col-4 cop">
-                    @Html.DropDownListFor(model => model.Score_Overall, Html.GetListItems(), new { @class = "selectbox2" })
-                    @Html.ValidationMessageFor(model => model.Score_Overall)
+                    @Html.DropDownListFor(model => model.Score_Helpfullness, Html.GetListItems(), new { @class = "selectbox2" })
+                    @Html.ValidationMessageFor(model => model.Score_Helpfullness)
                     <div class="clearfix"></div>
                 </div>
 
@@ -182,10 +182,5 @@
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
-@section scripts
-    {
     @Scripts.Render("~/bundles/jqueryval")
 }

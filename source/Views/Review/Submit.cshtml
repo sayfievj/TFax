@@ -83,7 +83,7 @@ else
 
                     <div class="col-6"><label>Subject being reviewed</label></div>
                     <div class="col-6 cop">
-                        @Html.DropDownList("Subject",null, "Please select", new { @class = "selectbox2" })
+                        @Html.DropDownList("Subject", null, "Please select", new { @class = "selectbox2" })
                         @Html.ValidationMessageFor(model => model.Subject)
                         <div class="clearfix"></div>
                     </div>
@@ -114,7 +114,7 @@ else
                         <div class="clearfix"></div>
                     </div>
 
-                    <div class="col-8"><label>Passion</label></div>
+                    <div class="col-8"><label>Score Passion</label></div>
                     <div class="col-4 cop">
                         @Html.DropDownListFor(model => model.Score_Passion, Html.GetListItems(), new { @class = "selectbox2" })
                         @Html.ValidationMessageFor(model => model.Score_Passion)
@@ -129,10 +129,10 @@ else
 
                     </div>
 
-                    <div class="col-8"><label for="tutor-overall">tutor-overall</label></div>
+                    <div class="col-8"><label for="tutor-overall">Helpfullness</label></div>
                     <div class="col-4 cop">
-                        @Html.DropDownListFor(model => model.Score_Overall, Html.GetListItems(), new { @class = "selectbox2" })
-                        @Html.ValidationMessageFor(model => model.Score_Overall)
+                        @Html.DropDownListFor(model => model.Score_Helpfullness, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_Helpfullness)
                         <div class="clearfix"></div>
                     </div>
 

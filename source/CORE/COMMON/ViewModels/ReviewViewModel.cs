@@ -14,14 +14,14 @@ namespace TFax.Web.CORE.COMMON.ViewModels
         [HiddenInput(DisplayValue = false)]
         public long Id { get; set; }
 
-        [Display(Name = "Title")]
+        [Display(Name = "Review Title")]
         public string ReviewTitle { get; set; }
 
-        [Display(Name = "Subject")]
+        [Display(Name = "Subject being reviewed")]
         [Required]
         public string Subject { get; set; }
 
-        [Display(Name = "Detail")]
+        [Display(Name = "Subject Detail")]
         public string Subject_Detail { get; set; }
 
         [Display(Name = "Location: What was your overall experience with the tutor?")]
@@ -51,8 +51,7 @@ namespace TFax.Web.CORE.COMMON.ViewModels
         [Required]
         [Display(Name = "Passion")]
         public Nullable<int> Score_Passion { get; set; }
-
-        [Required]
+         
         [Display(Name = "Overall")]
         public Nullable<int> Score_Overall { get; set; }
 
