@@ -1,0 +1,94 @@
+﻿@model SearchTutorViewModel
+
+<div class="clearfix"></div>
+<form class="search-tutor" role="form">
+    <div class="col-4 cop item-s">
+        <div class="cmm">
+
+            @Html.LabelFor(model => model.CountryId, "Country")<br>
+
+            @Html.DropDownList("CountryId", null, "All countries", new { @class = "selectbox2", style = "display: none;" })
+
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-4 cop item-s">
+        <div class="cmm">
+
+            @Html.LabelFor(model => model.StateId, "State")<br>
+
+            @Html.DropDownList("StateId", null, "All states", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-4 cop item-s">
+        <div class="cmm">
+
+            @Html.LabelFor(model => model.CityId, "City")<br>
+
+            @Html.DropDownList("CityId", null, "All cities", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-3 cop item-s">
+        <div class="cmm">
+
+            @Html.LabelFor(model => model.GradeLevel, "Grade level")<br>
+
+            @Html.DropDownList("GradeLevel", Html.GetListItems(), "All grades", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+        </div>
+    </div> <!-- end item-s -->
+    <div class="col-3 cop item-s">
+        <div class="cmm">
+
+            @Html.LabelFor(model => model.SubjectId, "Subject")<br>
+
+            @Html.DropDownList("SubjectId", null, "All subjects", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+
+        </div>
+    </div> <!-- end item-s -->
+
+    <div class="col-6 cop item-s">
+
+        <div class="col-5 x55 cop item-s">
+            <div class="cmm">
+
+                @Html.LabelFor(model => model.OverallRatingFrom, "Overall rating")<br>
+
+                @Html.DropDownList("OverallRatingFrom", Html.GetListItems(), "Any rating", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+            </div>
+        </div> <!-- end item-s -->
+        <div class="col-1 x1 cop item-s">
+            <div class="cmm">
+                <div class="form-group">
+                    <p class="bc">to</p>
+                </div>
+            </div>
+        </div> <!-- end item-s -->
+        <div class="col-5 x55 cop item-s">
+            <div class="cmm">
+                <div class="form-group">
+                    <div><label class="w">.<br></label></div>
+
+                    @Html.DropDownList("OverallRatingTo", Html.GetListItems(), "Any rating", new { @class = "selectbox2 selectBox", style = "display: none;" })
+
+
+                </div>
+            </div>
+        </div> <!-- end item-s -->
+
+    </div>
+
+    <div class="col-xs-12 cop item-s">
+        <div class="cmm">
+            <div class="cop btns-c">
+                <button class="btn btn-blue" type="submit">Search</button>
+                <button class="btn btn-blue" type="button">Advanced search</button>
+                <button class="btn btn-grey" type="reset">Clear</button>
+            </div>
+        </div>
+    </div> <!-- end item-s -->
+    <div class="clearfix"></div>
+</form>

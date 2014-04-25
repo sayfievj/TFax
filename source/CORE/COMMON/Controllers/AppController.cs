@@ -75,10 +75,29 @@ namespace TFax.Web.CORE.COMMON.Controllers
 
             var model = new RegisterViewModel();
             {
-                ViewBag.RoleId = new SelectList(UnitOfWork.Db.Set<MemberRole>().Where(w => w.Id != (long) Role.Admin),"Id", "Name");
+                ViewBag.RoleId = new SelectList(UnitOfWork.Db.Set<MemberRole>().Where(w => w.Id != (long)Role.Admin), "Id", "Name");
             }
 
             return PartialView("Partials/_Account", model);
+        }
+
+        #endregion
+
+        #region Search
+
+        [AllowAnonymous]
+        [ChildActionOnly]
+        public ActionResult SearchBar()
+        {
+            //address
+            ViewBag.CountryId = new SelectList(UnitOfWork.Db.Set<Country>(), "Id", "Name");
+            ViewBag.StateId = new SelectList(UnitOfWork.Db.Set<State>(), "Id", "Name");
+            ViewBag.CityId = new SelectList(UnitOfWork.Db.Set<City>(), "Id", "Name");
+
+            //subjects 
+            ViewBag.SubjectId = new SelectList(UnitOfWork.Db.Set<Profile_Subjects>(), "Id", "Subject"); ;
+
+            return PartialView("Partials/_Search");
         }
 
         #endregion

@@ -16,15 +16,7 @@ namespace TFax.Web.Controllers
     [HttpTraceFilter]
     public class MemberMasterController : DbController<MemberMaster>
     {
-
-        private void LoadViewBags()
-        {
-
-            //address
-            ViewBag.CountryId = new SelectList(UnitOfWork.Db.Set<Country>(), "Id", "Name");
-            ViewBag.StateId = new SelectList(UnitOfWork.Db.Set<State>(), "Id", "Name");
-            ViewBag.CityId = new SelectList(UnitOfWork.Db.Set<City>(), "Id", "Name");
-        }
+         
 
         //
         // GET: /Member/
@@ -36,9 +28,7 @@ namespace TFax.Web.Controllers
                         .OrderByDescending(o => o.RegisteredDate)
                         .ToPagedList(page, size)
             };
-
-            LoadViewBags();
-
+             
             return View(model);
         }
 

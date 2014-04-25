@@ -497,7 +497,6 @@
     <Content Include="Views\Account\Partials\_Messages.cshtml" />
     <Content Include="Views\Account\Partials\_Favorites.cshtml" />
     <Content Include="Views\Account\Partials\_Reviews.cshtml" />
-    <Content Include="Views\Account\Partials\_Search.cshtml" />
     <None Include="Views\Error\Status\401.cshtml" />
     <None Include="Views\Error\Status\403.cshtml" />
     <None Include="Views\Error\Status\404.cshtml" />
@@ -562,6 +561,7 @@
     <Content Include="Views\Message\Details.cshtml" />
     <Content Include="Views\Review\Partials\_Paging.cshtml" />
     <Content Include="Views\Favorite\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
