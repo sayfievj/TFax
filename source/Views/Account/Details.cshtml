@@ -1,163 +1,95 @@
 ﻿@model MemberMaster
-
 @{
     ViewBag.Title = "See a Profile";
     var profile = Model.Profile_Master.FirstOrDefault();
 }
 
-
-<div class="form-horizontal form-grey spaced">
-
-    <p class="greystand">
-        Account Info
-    </p>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email_Login, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            <p class="form-control-static">
-                @Html.DisplayFor(model => model.Email_Login)
-            </p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.FirstName, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.LastName, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    @if (Model.Cover_File != null)
-    {
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cover_File, new { @class = "col-4 control-label tar" })
-            <div class="col-6">
-                <a href="@Model.Cover_File.ToBase64String()">
-                    <img alt="Cover Image" src="@Model.Cover_File.ToBase64ImageString(135,135)" />
-                </a>
-            </div>
-        </div>
-    }
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.Address, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Street, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.Street, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CityId, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.City.Name, null, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.StateId, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.State.Name, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CountryId, "CountryId", new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.Country.Name, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MemberClass, new { @class = "col-4 control-label tar" })
-        <div class="col-6">
-            @Html.DisplayFor(model => model.MemberClass, new { @class = "form-control-static" })
-        </div>
-    </div>
-
-    <p class="greystand">Diplomas and Certificates</p>
-    <div class="row spaced diploma-container">
-        <div data-id="edu-items">
-            @foreach (var edu in Model.Profile_EduBackground)
-            {
-                <div class="col-4 outim item-diploma">
-                    <table class="table-responsive">
-                        <tr>
-                            <th>@Html.LabelFor(model => edu.College_University, new { @class = "col-4 control-label tar" })</th>
-                            <td>@Html.DisplayFor(model => edu.College_University)</td>
-                        </tr>
-                        <tr>
-                            <th>@Html.LabelFor(model => edu.GraduateYear, new { @class = "col-4 control-label tar" })</th>
-                            <td>@Html.DisplayFor(model => edu.GraduateYear)</td>
-                        </tr>
-                        <tr>
-                            <th>@Html.LabelFor(model => edu.Major, new { @class = "col-4 control-label tar" })</th>
-                            <td>@Html.DisplayFor(model => edu.Major)</td>
-                        </tr>
-                        <tr>
-                            <th>@Html.LabelFor(model => edu.Degree, new { @class = "col-4 control-label tar" })</th>
-                            <td>@Html.DisplayFor(model => edu.Degree)</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <a href="@Model.Cover_File.ToBase64String()">
-                                    <img alt="@edu.Proof_Title" title="@edu.Proof_Title" src="@edu.Proof_File.ToBase64ImageString(135, 135)" />
-                                </a>
-                                <strong class="label-space">@edu.Proof_Title</strong>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="clearfix"></div>
-            }
-        </div>
-        <div class="clearfix"></div>
-    </div>
+<div class="col-2 cop bpush avatar-certs">
+    <a href="@Model.Cover_File.ToBase64String()">
+        <img alt="Cover Image" src="@Model.Cover_File.ToBase64ImageString(120,120)" style="width: 100%;" alt="@Model.GetFullName()">
+    </a>
+    <p><i class="@Model.GetColor()"></i><a href="#">@Model.GetFullName()</a></p>
 
     @if (Model.MemberRoleId == (long?)Role.Tutor)
     {
-        <p class="greystand">Links</p>
-        <div class="group">
 
+        <p class="side-title">Diplomas and Certificates</p>
+
+        <div class="side-cert">
+            @foreach (var edu in Model.Profile_EduBackground)
+            {
+                <a href="@edu.Proof_File.ToBase64String()">
+                    <img src="@edu.Proof_File.ToBase64ImageString(110, 100)" alt="@edu.Proof_Title">
+                </a>
+            }
+        </div>
+    }
+
+</div> <!-- end avatar-certs -->
+
+<div class="col-10 cop bpush">
+    <div class="profile-middle">
+        <div class="col-2">
+            <p class="b">Ad/Profile link:</p>
+        </div>
+        <div class="col-10">
             @foreach (var link in profile.Profile_Links)
             {
-                <p class="col-8">
+                <p>
                     <a title="@link.LinkTitle" href="@link.LinkURL">@link.LinkTitle</a>
                 </p>
             }
         </div>
-        <div class="clearfix"></div>
+    </div>
+     
+    <div class="clearfix bpush"></div>
+    <div class="col-6">
+        <p><span class="b">Location: </span><span>@Model.GetLocation()</span></p>
+        <p><span class="b">Online tutoring: </span><span>yes/no</span></p>
+        <p><span class="b">Hours of experience: </span><span>600+</span></p>
+        <p><span class="b">Educational institution: </span><span>University of Wally, 2016</span></p>
+    </div>
 
-        <p class="greystand">Subjects</p>
-        <div class="group">
+    <div class="col-6">
+        <p><span class="b">E-mail: </span><span><a href="mailto:@Model.Email_Login">@Model.Email_Login</a></span></p>
+        <p><span class="b">Travel: </span><span>within 20 miles</span></p>
+    </div>
+     
+    <div class="col-12 spaced">
+        <div class="spaced"><span class="b">Major: </span><span>Mathematics</span></div>
 
-            @foreach (var subject in profile.Profile_Subjects)
-            {
+        @if (Model.MemberRoleId == (long?)Role.Tutor)
+        {
+            <div class="spaced">
+                <span class="b">Subjects: </span>
+                <ul class="ulinline-sub">
+                    @foreach (var item in profile.Profile_Subjects)
+                    {
+                        <li><span>@item.Subject</span></li>
+                    }
+                </ul>
+                <span class="clearfix"></span>
+            </div>
+        }
 
-                <p class="col-4">
-                    Subject: @subject.Subject
-                </p>
-                <p class="col-4">
-                    Representative: @subject.Representative
-                </p>
-
-            }
-            <div class="clearfix"></div>
-
+        <div class="spaced">
+            <p><span class="b">Standardized Test Results</span></p>
+            <ul class="ul-double">
+                <li><span class="test-name">PSAT</span><span class="test-result">5.6</span></li>
+                <li><span class="test-name">SAT</span><span class="test-result">5.6</span></li>
+                <li><span class="test-name">SATII</span><span class="test-result">5.6</span></li>
+                <li><span class="test-name">GRE</span><span class="test-result">5.6</span></li>
+                <li><span class="test-name">GMAT</span><span class="test-result">5.6</span></li>
+            </ul>
         </div>
-    }
-</div>
+    </div>
+     
+    <div class="col-12 spaced">
+        <p><span class="b">Average hourly fee: </span><span>$250/hour</span></p>
+        <p><span class="b">Cancellation: </span><span>24 hours notice required</span></p>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+</div><!-- end col-10 -->

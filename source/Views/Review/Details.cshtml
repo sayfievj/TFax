@@ -1,7 +1,6 @@
 ﻿@model  Review
-
 @{
-    ViewBag.Title = Model.ReviewTitle;
+    ViewBag.Title = "See a Review";
     Layout = "~/Views/Shared/_Review.cshtml";
     var profile = Model.Profile_Master.MemberMaster.Profile_Master.FirstOrDefault();
 }
