@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="@Url.Content("~/Content/main.css")" rel="stylesheet" />
+
     <link href="@Url.Content("~/Content/font-awesome.css")" rel="stylesheet" />
     <!--[if gte IE 9]>
         <link href="@Url.Content("~/Content/ie9-only.css")" rel="stylesheet" />
@@ -29,27 +30,25 @@
 
         @Html.Partial("Partials/_Menu")
 
-        <div class="row bpush">
 
-            <div class="row bpush c-wrap">
+        <div class="row bpush c-wrap">
 
-                <div class="col-10 bpush b-right col-wide">
-                    <div class="content">
-                        @if (ViewBag.VisableTitle != true)
-                        {
-                            <h2 class="page-title">@ViewBag.Title</h2>
-                            <hr class="splitter-d" />
-                        }
-                        @RenderBody()
-                    </div>
+            <div class="col-10 bpush b-right col-wide">
+                <div class="content">
+                    @if (ViewBag.VisableTitle != true)
+                    {
+                        <h2 class="page-title">@ViewBag.Title</h2>
+                        <hr class="splitter-d" />
+                    }
+                    @RenderBody()
                 </div>
-                <div class="col-3 aside">
-                    <div class="aside-widget">
-                        <img src="~/Scripts/holder.js/100%x600/text:Skyscraper" alt="">
-                    </div>
-                </div>
-
             </div>
+            <div class="col-3 aside">
+                <div class="aside-widget">
+                    <img src="~/Scripts/holder.js/100%x600/text:Skyscraper" alt="">
+                </div>
+            </div>
+
         </div>
 
         @RenderSection("buttom", false)
@@ -65,7 +64,7 @@
     <!--[if lt IE 9]>
         <script src="@Url.Content("~/Scripts/respond.js")"></script>
         <script src="@Url.Content("~/Scripts/html5shiv.js")"></script>
-    <![endif]-->
+    <![endif]--> 
     <script src="@Url.Content("~/Scripts/moment.js")"></script>
     <script src="@Url.Content("~/Scripts/holder.js")"></script>
     <script src="@Url.Content("~/Scripts/easyListSplitter.js")"></script>

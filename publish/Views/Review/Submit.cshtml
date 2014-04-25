@@ -2,9 +2,13 @@
 
 @{
     ViewBag.Title = "Submit a review";
-    var profile = Model.Member.Profile_Master.FirstOrDefault();
     Layout = "~/Views/Shared/_Review.cshtml";
+
+    var member = (MemberMaster)ViewBag.Member;
+    var profile = member.Profile_Master.ElementAt(0);
+
 }
+
 
 @if (TempData["ReviewStatus"] != null)
 {
@@ -12,177 +16,171 @@
 }
 else
 {
-    using (Html.BeginForm("Submit", "Review", FormMethod.Post, new { role = "form", @class = "form-horizontal form-grey spaced" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
 
-        <div class="col-2 cop bpush avatar">
-            <a href="@Model.Member.Cover_File.ToBase64String()">
-                <img src="@Model.Member.Cover_File.ToBase64ImageString(135, 135)" style="width: 100%;" alt="">
-            </a>
-            <p>
-                <i class="@Model.Member.GetColor()"></i>
-                <a href="@Url.Action("Details", "Account", new {id = Model.Member.Id})">@Model.Member.GetFullName()</a>
-            </p>
-        </div>
+    <div class="col-2 cop bpush avatar">
+        <a href="@member.Cover_File.ToBase64String()">
+            <img src="@member.Cover_File.ToBase64ImageString(135, 135)" alt="">
+        </a>
+        <p>
+            <i class="@member.GetColor()"></i>
+            <a href="@Url.Action("Details", "Account", new { id = member.Id })">@member.GetFullName()</a>
+        </p>
+    </div>
 
-        <div class="col-10 cop bpush">
+    <div class="col-10 cop bpush">
 
-            @if (profile != null && profile.Profile_Links.Any())
-            {
-                <div class="col-2">
-                    <p class="b">Profile links:</p>
+        @using (Html.BeginForm("Submit", "Review", FormMethod.Post, new { role = "form", id = "submit-tutor-review", @class = "form-blue" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="col-12 cop">
+
+                <div class="form-group tar cop form-grid">
+                    <div class="col-2"><label>Name</label></div>
+                    <div class="col-10 cop">
+                        <p class="text-left form-control-static">@member.GetFullName()</p>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-2"><label>Profile link</label></div>
+                    <div class="col-10">
+                        @foreach (Profile_Links link in profile.Profile_Links)
+                        {
+                            <p class="text-left form-control-static"><a href="@link.LinkURL">@link.LinkTitle</a></p>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-2"><label for="tutor-additional">additional</label></div>
+                    <div class="col-5 cop"><input type="text" id="tutor-additional" class="form-control"></div>
+                    <div class="col-2 cop">
+                        <button class="btn btn-blue btn-addit" href="#">Add</button>
+                        <div class="clearfix"></div>
+                    </div>
+
                 </div>
-                <div class="col-10">
-                    @foreach (var link in profile.Profile_Links)
-                    {
-                        <p><a href="@link.LinkURL">@link.LinkTitle</a></p>
-                    }
+
+                <div class="form-group col-7 tar cop form-grid">
+
+                    <div class="col-6"><label>location</label></div>
+                    <div class="col-6 cop">
+                        <p class="text-left form-control-static">@member.GetLocation()</p>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-6"><label>e-mail</label></div>
+                    <div class="col-6 cop">
+                        <p class="text-left form-control-static">@member.Email_Login</p>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-6">@Html.LabelFor(model => model.ReviewTitle, "Title", new { @class = "control-label" })</div>
+                    <div class="col-6 cop">
+                        @Html.TextBoxFor(model => model.ReviewTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ReviewTitle)
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-6"><label>Subject being reviewed</label></div>
+                    <div class="col-6 cop">
+                        @Html.DropDownList("Subject", null, "Please select", new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Subject)
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-6">@Html.LabelFor(model => model.Subject_Detail, "Detail", new { @class = "control-label" })</div>
+                    <div class="col-6 cop">
+                        @Html.TextAreaFor(model => model.Subject_Detail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Subject_Detail)
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-6"><label for="student-hours">You were tutored</label></div>
+                    <div class="col-4 cop"><input type="text" class="form-control" id="student-hours" placeholder="hours"></div>
+                    <div class="col-2 cop">
+                        <label for="student-hours">hours</label>
+                        <div class="clearfix"></div>
+                    </div>
+
                 </div>
-                <div class="clearfix bpush"></div>
-            }
 
-            <div class="col-6">
-                <p><span class="b">Location: </span> <span>@Model.Member.GetLocation()</span></p>
-            </div>
+                <div class="form-group col-5 tar cop form-grid">
+                    <div class="col-12"><label>Please give your score for</label></div>
 
-            <div class="col-6">
-                <p><span class="b">E-mail: </span> <a href="mailto:@Model.Member.Email_Login">@Model.Member.Email_Login</a></p>
-            </div>
-            <div class="clearfix bpush"></div>
+                    <div class="col-8"><label>Subject knowledge</label></div>
+                    <div class="col-4 cop">
+                        @Html.DropDownListFor(model => model.Score_SubjectKnowledge, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_SubjectKnowledge)
+                        <div class="clearfix"></div>
+                    </div>
 
-            <div class="col-2">
-                <p class="b">
-                    @Html.LabelFor(model => model.Review.ReviewTitle, "Title:", new { @class = "control-label" })
+                    <div class="col-8"><label>Score Passion</label></div>
+                    <div class="col-4 cop">
+                        @Html.DropDownListFor(model => model.Score_Passion, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_Passion)
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-8"><label for="tutor-communication">Communication</label></div>
+                    <div class="col-4 cop">
+                        @Html.DropDownListFor(model => model.Communication, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Communication)
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                    <div class="col-8"><label for="tutor-overall">Helpfullness</label></div>
+                    <div class="col-4 cop">
+                        @Html.DropDownListFor(model => model.Score_Helpfullness, Html.GetListItems(), new { @class = "selectbox2" })
+                        @Html.ValidationMessageFor(model => model.Score_Helpfullness)
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="hr splitter-d bpush"></div>
+
+                <p class="stand">Location: What was your overall experience with the tutor?</p>
+                <p class="bqt2">
+                    @Html.TextAreaFor(model => model.ReviewSummary, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.ReviewSummary)
                 </p>
-            </div>
-            <div class="col-10">
-                @Html.TextBoxFor(model => model.Review.ReviewTitle, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Review.ReviewTitle)
-            </div>
 
-            <div class="clearfix bpush"></div>
-
-            <div class="col-2">
-                <p class="b">
-                    @Html.LabelFor(model => model.Review.Subject, "Subject:", new { @class = "control-label" })
+                <p class="stand">Subject Knowledge:</p>
+                <p class="bqt2">
+                    @Html.TextAreaFor(model => model.Description_SubjectKnowledge, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_SubjectKnowledge)
                 </p>
-            </div>
-            <div class="col-10">
-                @Html.DropDownListFor(model => model.Review.Subject, new SelectListItem[] { }, String.Empty, new { @class = "form-control selectBox2 select2-choice" })
-                @Html.ValidationMessageFor(model => model.Review.Subject)
-            </div>
 
-            <div class="clearfix bpush"></div>
-            <div class="col-2">
-                <p class="b">
-                    @Html.LabelFor(model => model.Review.Subject_Detail, "Detail:", new { @class = "control-label" })
+                <p class="stand">Helpfulness</p>
+                <p class="bqt2">
+                    @Html.TextAreaFor(model => model.Description_Helpfullness, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_Helpfullness)
+
                 </p>
+
+                <p class="stand">Passion: Describe Tutors overall attitude in teaching this subject.</p>
+                <p class="bqt2">
+                    @Html.TextAreaFor(model => model.Description_Passion, new { @class = "form-control limit-w" })
+                    @Html.ValidationMessageFor(model => model.Description_Passion)
+
+                </p>
+
+                <p class="stand">Communication</p>
+                <p class="bqt2">
+                    @Html.TextArea("Description_Communication", new { @class = "form-control limit-w" })
+                </p>
+
+                <p class="bqt2 spaced2 tac"><button type="submit" class="btn btn-blue btn-olg">Submit this Review</button></p>
+
             </div>
-            <div class="col-10">
-                @Html.TextAreaFor(model => model.Review.Subject_Detail, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Review.Subject_Detail)
-            </div>
-
-            <div class="clearfix bpush"></div>
-            <div class="col-4">
-                <p class="b">Please give your score for </p>
-            </div>
-            <div class="col-8">
-
-                <div class="col-6">
-                    @Html.LabelFor(model => model.Review.Score_SubjectKnowledge, "Knowledge:", new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Review.Score_SubjectKnowledge, new { @class = "form-control aSpinEdit" })
-                    @Html.ValidationMessageFor(model => model.Review.Score_SubjectKnowledge)
-                </div>
-
-                <div class="col-6">
-                    @Html.LabelFor(model => model.Review.Score_Helpfullness, "Helpfulness:", new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Review.Score_Helpfullness, new { @class = "form-control aSpinEdit" })
-                    @Html.ValidationMessageFor(model => model.Review.Score_Helpfullness)
-                </div>
-
-                <div class="col-6">
-                    @Html.LabelFor(model => model.Review.Score_Passion, "Passion:", new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Review.Score_Passion, new { @class = "form-control aSpinEdit" })
-                    @Html.ValidationMessageFor(model => model.Review.Score_Passion)
-                </div>
-
-                <div class="col-6">
-                    @Html.LabelFor(model => model.Review.Communication, "Communication:", new { @class = "control-label" })
-                    @Html.TextBoxFor(model => model.Review.Communication, new { @class = "form-control aSpinEdit" })
-                    @Html.ValidationMessageFor(model => model.Review.Communication)
-                </div>
-            </div>
-
             <div class="clearfix"></div>
 
-            <div class="btns-a bpush">
+        }
 
-
-                <table class="table">
-
-                    <tr>
-
-                        <td colspan="2">
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Review.ReviewSummary, "Location: What was your overall experience with the tutor?", new { @class = "col-4 control-label tar" })
-                                <div class="col-6">
-                                    @Html.TextAreaFor(model => model.Review.ReviewSummary, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Review.ReviewSummary)
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Review.Description_SubjectKnowledge, "Subject Knowledge:", new { @class = "col-4 control-label" })
-                                <div class="col-6">
-                                    @Html.TextAreaFor(model => model.Review.Description_SubjectKnowledge, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Review.Description_SubjectKnowledge)
-                                </div>
-                            </div>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Review.Description_Helpfullness, "Helpfulness:", new { @class = "col-4 control-label tar" })
-                                <div class="col-6">
-                                    @Html.TextAreaFor(model => model.Review.Description_Helpfullness, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Review.Description_Helpfullness)
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Review.Description_Passion, "Passion: Describe Tutors overall attitude in teaching this subject.", new { @class = "col-4 control-label tar" })
-                                <div class="col-6">
-                                    @Html.TextAreaFor(model => model.Review.Description_Passion, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Review.Description_Passion)
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div class="tac">
-                    <button class="btn btn-blue btn-wide" type="submit">Save</button>
-                </div>
-
-
-            </div>
-
-            <div class="clearfix"></div>
-
-        </div>
-        <!-- end col-10 -->
-    }
-
+    </div>
 
     @section scripts
 {

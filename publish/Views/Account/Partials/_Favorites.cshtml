@@ -1,15 +1,21 @@
 ﻿@model IEnumerable<MyFavorite>
+@{
+    var tutors = Model.Count(m => m.Profile_Master.MemberMaster.MemberRoleId == (long?)Role.Tutor);
+    var students = Model.Count(m => m.Profile_Master.MemberMaster.MemberRoleId == (long?)Role.Student);
+}
 
-
-<h3 class="s-title"><a href="#">My Favorites</a>&nbsp;&nbsp;<a href="#" class="shrink">(2 tutors / 0 students)</a></h3>
+<h3 class="s-title"><a href="#">My Favorites</a>&nbsp;&nbsp;<a href="#" class="shrink">(@tutors tutors / @students students)</a></h3>
 <hr class="splitter-d">
 <div class="s-details">
     <ul>
-        <li class="col-2"><span>Location: </span>Santa Cruise</li>
-        <li class="col-1"><span>Status: </span>T</li>
-        <li class="col-3"><span>Subject: </span>Advanced Calculus</li>
-        <li class="col-3"><span>Location: </span>Irvine,CA</li>
-        <li class="col-3"><span>e-mail: </span><a href="#">santa@haven.org</a></li>
+        @foreach (var item in Model)
+        {
+            <li class="col-2"><span>Location: </span>@item.MemberMaster.GetLocation()</li>
+            <li class="col-1"><span>Status: </span>@item.Status</li>
+            <li class="col-3"><span>Subject: </span>Subject</li>
+            <li class="col-3"><span>Location: </span>@item.Profile_Master.MemberMaster.GetLocation()</li>
+            <li class="col-3"><span>e-mail: </span><a href="#">@item.Profile_Master.MemberMaster.Email_Login</a></li>
+        }
     </ul>
     <div class="clearfix"></div>
 </div>

@@ -41,6 +41,7 @@
                         <li>@Html.ActionLink("My Reviews", "Account", "Review")</li>
                         <li><a href="#">Payment History</a></li>
                         <li>@Html.ActionLink("My Profile", "Profile", "Account")</li>
+                        <li>@Html.ActionLink("See Profile", "Details", "Account")</li>
                         @if (!MembershipHelper.Current.IsActivated)
                         {
                             <li>@Html.ActionLink("Activate My Account", "Active", "Account", new { id = MembershipHelper.Current.Id }, null)</li>

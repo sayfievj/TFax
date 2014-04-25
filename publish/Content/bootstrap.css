@@ -14,7 +14,7 @@ audio, canvas, video {
     }
 
 [hidden], template {
-    display: none;
+    display: none; 
 }
 
 html {

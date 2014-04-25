@@ -20,7 +20,24 @@
 
 <div class="clearfix"></div>
 
-@Html.Partial("Partials/_Search")
+<h3 class="s-title">
+    Search for
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-greytint dropdown-toggle btn-caret2" type="button">
+            Tutor
+            <span class="caret2"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a id="Student" href="#search-anchor">Student</a></li>
+            <li><a id="Student Group" href="#search-anchor">Student Group</a></li>
+            <li><a id="Student" href="#search-anchor">Class</a></li>
+        </ul>
+    </div>
+</h3> 
+
+<hr id="search-anchor" class="splitter-d">
+
+@Html.Action("SearchBar")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

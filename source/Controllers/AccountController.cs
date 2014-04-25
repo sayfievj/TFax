@@ -419,6 +419,9 @@ namespace TFax.Web.Controllers
         [AllowAnonymous]
         public ActionResult Details(long? id)
         {
+            if (id == null && MembershipHelper.Current.IsAuthenticated)
+                id = MembershipHelper.Current.Id;
+
             var member = DbRepository.Find(id);
 
             if (member == null)

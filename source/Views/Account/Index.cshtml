@@ -20,22 +20,22 @@
 
 <div class="clearfix"></div>
 
-<form class="form-inline select-taxo-form" role="form">
-    <div class="row zero">
-        <div class="cmm">
-            <label class="col-2 cop s-title sb2-inalign" for="select-taxo2">Search for</label>
-            <div class="col-4 cop">
+<h3 class="s-title">
+    Search for
+    <div class="btn-group">
+        <button data-toggle="dropdown" class="btn btn-greytint dropdown-toggle btn-caret2" type="button">
+            Tutor
+            <span class="caret2"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a id="Student" href="#search-anchor">Student</a></li>
+            <li><a id="Student Group" href="#search-anchor">Student Group</a></li>
+            <li><a id="Student" href="#search-anchor">Class</a></li>
+        </ul>
+    </div>
+</h3> 
 
-                @Html.DropDownList("SearchTutorId", null, "Select types", new { @class = "selectbox2", style = "display: none;" })
-
-            </div>
-            <div class="col-2">
-                <button class="btn btn-blue" type="submit">Go</button>
-            </div>
-        </div>
-    </div> <!-- end item -->
-    <div class="clearfix"></div>
-</form>
+<hr id="search-anchor" class="splitter-d">
 
 @Html.Action("SearchBar")
 
